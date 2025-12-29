@@ -1,0 +1,138 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{hyperref}
+\usepackage{lmodern}
+
+\hypersetup{colorlinks=true, linkcolor=black, urlcolor=blue}
+
+\begin{document}
+\pagenumbering{gobble} % no number on cover
+
+%------------------ Cover Page ------------------
+\begin{titlepage}
+  \begin{center}
+    % Logos row (centered, same height)
+    \begin{center}
+      \begin{minipage}[c]{0.45\textwidth}
+        \centering
+        \includegraphics[height=3.5cm]{uemf1.png}
+      \end{minipage}%
+      \hfill
+      \begin{minipage}[c]{0.45\textwidth}
+        \centering
+        \includegraphics[height=2cm]{download.png}
+      \end{minipage}
+    \end{center}
+
+    \vspace{2cm}
+
+    {\large Final Exam Report\par}
+    \vspace{1cm}\rule{\textwidth}{0.2pt}
+
+    \vspace{0.8cm}
+    {\LARGE\bfseries RoboConnect: Centralized Robotic Fleet Management\par}
+    \vspace{0.6cm}
+    {\large Android + Robotics Integration Proposal\par}
+    \vspace{0.4cm}
+    {\normalsize Persistent Multi-Robot Control over Wi-Fi\par}
+    \vspace{0.6cm}
+    {\large Applied Context: Home/Workshop/Education\par}
+    \vspace{0.8cm}
+    \rule{\textwidth}{0.2pt}
+
+    \vspace{2.1cm}
+    {\large\bfseries Realized by:\par}
+    \vspace{0.5cm}
+    \begin{center}
+    \begin{tabular}{c c}
+      Lamiae Hadi \\ Louay Mikou \\
+      \multicolumn{2}{c}{Ilyass Arro} \\
+    \end{tabular}
+    \end{center}
+
+    \vspace{1.4cm}
+    {\large\bfseries Supervised by:\par}
+    \vspace{0.2cm}
+    {\large Prof. Hamza Mouncif\par}
+
+    \vfill
+    {\small\bfseries Academic Year} {\small 2025--2026\par}
+  \end{center}
+\end{titlepage}
+
+%------------------ Table of Contents (own page) ------------------
+\cleardoublepage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\tableofcontents
+\thispagestyle{plain}
+\cleardoublepage
+
+%------------------ Body starts here ------------------
+
+\section{Project Overview}
+\subsection{Title}
+\textbf{RoboConnect: Centralized Robotic Fleet Management}
+
+\subsection{Short Description}
+RoboConnect is an Android application paired with a heterogeneous robot fleet. The app discovers and pairs robots over Bluetooth/Wi-Fi, stores credentials for fast reconnects, and offers direct command/control. Robots expose a pairing button to enter pairing mode and accept app commands. The system addresses multi-robot management with a centralized UI, role-based access, and persistent automated connectivity.
+
+\subsection{Target Users}
+\begin{itemize}[noitemsep]
+  \item Standard users: individuals controlling one or more robots (home automation, workshops, education); access shared robots.
+  \item Robot administrators: users who add robots; full control, deletion, and permission management.
+\end{itemize}
+
+\section{Functional Requirements}
+\begin{longtable}{@{}p{1.3cm}p{3.8cm}p{7.8cm}p{2.5cm}p{0cm}@{}}
+\toprule
+\textbf{FR\#} & \textbf{Feature} & \textbf{Description} & \textbf{Category} & \\
+\midrule
+FR1 & Login \& Authentication & Users sign in to the app. & Android & \\
+FR2 & Pairing \& Discovery & Detects and lists robots in pairing mode. & Comm & \\
+FR3 & Robot Add/Register & Registers a discovered robot; stores credentials (CRUD); user becomes administrator. & Android/Comm & \\
+FR4 & Robot List \& Status & Dynamic list of owned/shared robots with live connection status. & Android & \\
+FR5 & Direct Robot Control & Sends action commands (movement, servos, etc.) to the robot. & Comm/Robot & \\
+FR6 & Robot Deletion & Administrator removes a robot from account and database. & Android & \\
+FR7 & Permission Management & Administrator grants/revokes access for other users. & Android & \\
+FR8 & Auto-Reconnect & App reconnects using stored credentials. & Comm & \\
+FR9 & Pairing Mode (Robot) & Robot enters pairing mode on physical button press. & Robot & \\
+FR10 & Command Execution (Robot) & Robot executes commands received from the app. & Robot & \\
+\bottomrule
+\end{longtable}
+
+\section{Non-Functional Requirements}
+\begin{itemize}[noitemsep]
+  \item Stable Bluetooth/Wi-Fi communication during commands and auto-reconnect.
+  \item Role/permission enforcement: only authenticated, authorized users can command robots.
+  \item Intuitive navigation and clear UI (robust lists, easy command access).
+  \item Responsive performance: fast loading of main screens and status updates.
+  \item Data persistence via local DB or remote API/Firebase for continuity.
+\end{itemize}
+
+\section{Screens and Navigation}
+\begin{itemize}[noitemsep]
+  \item \textbf{Login/Home}: Enter credentials, sign in, proceed to Robot List.
+  \item \textbf{Robot List}: See owned/shared robots with status; tap robot → Control; tap “+ Pair/Add” → Pairing; link to Settings/Admin.
+  \item \textbf{Pairing}: Shows robots in pairing mode; select/register a robot; returns to Robot List.
+  \item \textbf{Control Page}: Sliders/buttons/joysticks send commands; shows status; disconnect returns to Robot List.
+  \item \textbf{Settings/Admin}: Manage permissions; delete robot; navigate back to Robot List or Control.
+\end{itemize}
+
+\section{Grading Alignment (Internal Check)}
+\begin{itemize}[noitemsep]
+  \item Clarity \& completeness: overview, users, purpose.
+  \item Functional scope: balanced Android + robotics + comm (FR1--FR10).
+  \item Screens \& navigation: listed with components/actions.
+  \item Non-functional: stability, security, UX, performance, persistence.
+  \item Work plan \& responsibilities: timeline + roles.
+  \item Presentation: separate cover, ToC on its own page, labeled tables.
+\end{itemize}
+
+\end{document}
