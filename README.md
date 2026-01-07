@@ -9,7 +9,7 @@
 - 🎯 **Color-Coded Controls**: Intuitive operation with visual feedback
 - 📱 **Material Design**: Elevated cards, smooth animations, modern components
 - 🚀 **Full Feature Set**: All requirements from cahier de charge implemented
-- 🔐 **Secure**: Firebase Authentication with role-based permissions
+- 🔐 **Secure**: Local SQLite database with SharedPreferences authentication
 
 ## 🎨 Visual Design
 
@@ -26,10 +26,10 @@ See [VISUAL_SCREEN_GUIDE.md](VISUAL_SCREEN_GUIDE.md) for screen previews and [UI
 ## ✅ Implemented Features
 
 ### ✅ FR1: Login & Authentication
-- Firebase Authentication integration
+- Local authentication with SQLite database
 - Email/password login and registration
-- Password reset functionality
-- Automatic session management
+- SharedPreferences for session management
+- Automatic login state persistence
 
 ### ✅ FR2: Pairing & Discovery
 - Bluetooth device scanning
@@ -38,7 +38,7 @@ See [VISUAL_SCREEN_GUIDE.md](VISUAL_SCREEN_GUIDE.md) for screen previews and [UI
 
 ### ✅ FR3: Robot Add/Register
 - Register discovered robots
-- Store robot credentials locally (SQLite) and remotely (Firebase)
+- Store robot credentials in local SQLite database
 - User becomes administrator upon adding robot
 
 ### ✅ FR4: Robot List & Status
@@ -57,14 +57,14 @@ See [VISUAL_SCREEN_GUIDE.md](VISUAL_SCREEN_GUIDE.md) for screen previews and [UI
 
 ### ✅ FR6: Robot Deletion
 - Administrator can delete robots
-- Removes from local database and Firebase
+- Removes from local SQLite database
 - Confirmation dialog for safety
 
 ### ✅ FR7: Permission Management
 - Grant access to other users by email
 - View all users with access
 - Revoke permissions
-- Automatic notification to shared users
+- Stored in local SQLite database
 
 ### ✅ FR8: Auto-Reconnect
 - ConnectionManager with auto-reconnect logic
@@ -125,37 +125,35 @@ app/src/main/java/com/example/robotcontrol/
 
 - **Language**: Java
 - **UI**: Material Design Components, RecyclerView, CardView
-- **Database**: SQLite (local), Firebase Realtime Database (remote)
-- **Authentication**: Firebase Auth
+- **Database**: SQLite (local storage)
+- **Authentication**: SharedPreferences with local user database
 - **Communication**: Bluetooth Classic (RFCOMM)
-- **Architecture**: Activity-based with adapters and helpers
+- **Architecture**: Activity-based with adapters and SQLite helpers
 
 ## Setup Instructions
 
-### 1. Firebase Configuration
+### 1. Clone the Repository
 
-Replace the placeholder `google-services.json` with your actual Firebase configuration:
+```bash
+git clone https://github.com/Lamiaehadi/android-robot-control.git
+cd android-robot-control
+```
 
-1. Go to [Firebase Console](https://console.firebase.google.com/)
-2. Create a new project or select existing
-3. Add an Android app with package name: `com.example.robotcontrol`
-4. Download `google-services.json`
-5. Place it in `app/` directory
+### 2. Open in Android Studio
 
-### 2. Enable Firebase Services
-
-In Firebase Console:
-- Enable **Authentication** → Email/Password
-- Enable **Realtime Database** → Start in test mode (for development)
+1. Launch Android Studio
+2. Select "Open an Existing Project"
+3. Navigate to the cloned directory
+4. Wait for Gradle sync to complete
 
 ### 3. Build & Run
 
 ```bash
-./gradlew build
+./gradlew assembleDebug
 ./gradlew installDebug
 ```
 
-Or use Android Studio's Run button.
+Or use Android Studio's Run button (Shift+F10).
 
 ### 4. Permissions
 
@@ -223,13 +221,35 @@ See [UI_UX_DESIGN_SYSTEM.md](UI_UX_DESIGN_SYSTEM.md) for complete documentation.
 ## Database Schema
 
 ### SQLite (Local)
-- **robots**: id, name, mac_address, ip_address, type, owner_id, connection_type, last_connected
-- **credentials**: robot_id, ssid, password
 
-### Firebase (Remote)
-- **users/[userId]**: email, name, ownedRobots[], sharedRobots[]
-- **robots/[robotId]**: id, name, macAddress, ipAddress, type, ownerId, connectionType, lastConnected
-- **permissions/[robotId]/[userId]**: robotId, userId, userEmail, canControl, grantedAt
+**users table**:
+- `user_id` (TEXT PRIMARY KEY) - Unique user identifier
+- `email` (TEXT UNIQUE) - User email address
+- `user_name` (TEXT) - Display name
+- `user_password` (TEXT) - Hashed password
+
+**robots table**:
+- `id` (TEXT PRIMARY KEY) - Robot unique identifier
+- `name` (TEXT) - Robot display name
+- `mac_address` (TEXT) - Bluetooth MAC address
+- `ip_address` (TEXT) - WiFi IP address
+- `type` (TEXT) - Robot type/model
+- `owner_id` (TEXT) - User who owns this robot
+- `connection_type` (TEXT) - "bluetooth" or "wifi"
+- `last_connected` (INTEGER) - Timestamp of last connection
+
+**credentials table**:
+- `robot_id` (TEXT PRIMARY KEY) - Foreign key to robots
+- `ssid` (TEXT) - WiFi network name
+- `password` (TEXT) - WiFi password
+
+**permissions table**:
+- `permission_id` (TEXT PRIMARY KEY) - Unique permission identifier
+- `robot_id` (TEXT) - Foreign key to robots
+- `user_id` (TEXT) - User granted permission
+- `user_email` (TEXT) - Email of user with access
+- `can_control` (INTEGER) - 1 if can control, 0 otherwise
+- `granted_at` (INTEGER) - Timestamp when granted
 
 ## 📚 Documentation
 
@@ -243,22 +263,25 @@ See [UI_UX_DESIGN_SYSTEM.md](UI_UX_DESIGN_SYSTEM.md) for complete documentation.
 ## Known Limitations
 
 1. WiFi connection not fully implemented (Bluetooth only for now)
-2. Google services plugin set to `apply false` - needs proper Firebase setup
+2. Local storage only - no cloud sync between devices
 3. Requires Android 10 (API 29) or higher
 4. Robot firmware must implement Bluetooth RFCOMM server
+5. No password reset functionality (local auth)
 
 ## Future Enhancements
 
-- WiFi direct connection
+- Cloud synchronization with Firebase
+- WiFi direct connection support
 - Real-time sensor data display
 - Joystick control widget
 - Battery and signal indicators
-- Lottie animations
+- Lottie animations for better UX
 - Dark theme implementation
 - Multiple robot simultaneous control
 - Custom command macros
 - Robot activity logging
 - Push notifications for robot events
+- Password reset via email
 
 ## Authors
 
