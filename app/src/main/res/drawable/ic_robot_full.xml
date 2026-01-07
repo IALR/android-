@@ -1,0 +1,41 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+    <!-- Robot Head -->
+    <path
+        android:fillColor="@color/robot_blue_primary"
+        android:pathData="M16,12h16c2.21,0 4,1.79 4,4v12c0,2.21 -1.79,4 -4,4H16c-2.21,0 -4,-1.79 -4,-4V16c0,-2.21 1.79,-4 4,-4z"/>
+    <!-- Antenna -->
+    <path
+        android:fillColor="@color/robot_blue_primary"
+        android:pathData="M22,8h4v4h-4z"/>
+    <path
+        android:fillColor="@color/robot_blue_primary"
+        android:pathData="M24,6m-2,0a2,2 0,1 1,4 0a2,2 0,1 1,-4 0"/>
+    <!-- Eyes -->
+    <path
+        android:fillColor="@color/neon_green"
+        android:pathData="M20,20m-2,0a2,2 0,1 1,4 0a2,2 0,1 1,-4 0"/>
+    <path
+        android:fillColor="@color/neon_green"
+        android:pathData="M28,20m-2,0a2,2 0,1 1,4 0a2,2 0,1 1,-4 0"/>
+    <!-- Mouth -->
+    <path
+        android:strokeColor="@color/robot_blue_dark"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:pathData="M20,26h8"/>
+    <!-- Body Connection -->
+    <path
+        android:fillColor="@color/robot_blue_primary"
+        android:pathData="M22,32h4v4h-4z"/>
+    <!-- Legs -->
+    <path
+        android:fillColor="@color/robot_blue_dark"
+        android:pathData="M18,36h6v6h-6z"/>
+    <path
+        android:fillColor="@color/robot_blue_dark"
+        android:pathData="M24,36h6v6h-6z"/>
+</vector>

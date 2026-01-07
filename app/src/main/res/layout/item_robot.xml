@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/margin_medium"
+    android:layout_marginEnd="@dimen/margin_medium"
+    android:layout_marginTop="@dimen/margin_small"
+    android:layout_marginBottom="@dimen/margin_small"
+    android:background="@drawable/bg_card_elevated"
+    app:cardCornerRadius="@dimen/corner_radius_medium"
+    app:cardElevation="@dimen/elevation_medium">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/padding_medium"
+        android:gravity="center_vertical">
+
+        <!-- Robot Icon with Status Indicator -->
+        <FrameLayout
+            android:layout_width="@dimen/icon_large"
+            android:layout_height="@dimen/icon_large"
+            android:layout_marginEnd="@dimen/margin_medium">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_robot_full"
+                android:contentDescription="@string/robot_icon"
+                android:scaleType="centerInside" />
+
+            <!-- Status Indicator -->
+            <View
+                android:id="@+id/statusIndicator"
+                android:layout_width="@dimen/icon_tiny"
+                android:layout_height="@dimen/icon_tiny"
+                android:layout_gravity="top|end"
+                android:background="@drawable/ic_status_inactive" />
+        </FrameLayout>
+
+        <!-- Robot Info -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/robotName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/robot_name"
+                android:textAppearance="@style/TextAppearance.Title"
+                android:textColor="@color/text_primary"
+                android:layout_marginBottom="@dimen/margin_tiny" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/margin_tiny">
+
+                <TextView
+                    android:id="@+id/robotType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/robot_type"
+                    android:textAppearance="@style/TextAppearance.Caption"
+                    android:textColor="@color/text_secondary"
+                    android:paddingEnd="@dimen/padding_small"
+                    android:paddingStart="@dimen/padding_small"
+                    android:paddingTop="@dimen/padding_tiny"
+                    android:paddingBottom="@dimen/padding_tiny"
+                    android:background="@drawable/bg_gradient_accent"
+                    android:textStyle="bold"
+                    android:layout_marginEnd="@dimen/margin_small" />
+
+                <ImageView
+                    android:id="@+id/connectionTypeIcon"
+                    android:layout_width="@dimen/icon_small"
+                    android:layout_height="@dimen/icon_small"
+                    android:src="@drawable/ic_bluetooth"
+                    android:contentDescription="@string/connection_type"
+                    android:tint="@color/robot_blue_primary" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/lastConnectedText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/last_connected"
+                android:textAppearance="@style/TextAppearance.Caption"
+                android:textColor="@color/text_hint" />
+        </LinearLayout>
+
+        <!-- Connection Status -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/connectionStatusIcon"
+                android:layout_width="@dimen/icon_medium"
+                android:layout_height="@dimen/icon_medium"
+                android:src="@drawable/ic_disconnected"
+                android:contentDescription="@string/connection_status"
+                android:layout_marginBottom="@dimen/margin_tiny" />
+
+            <TextView
+                android:id="@+id/connectionStatusText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/status_disconnected"
+                android:textAppearance="@style/TextAppearance.Caption"
+                android:textColor="@color/status_disconnected"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

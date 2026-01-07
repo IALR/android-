@@ -1,0 +1,76 @@
+<resources>
+    <string name="app_name">RoboConnect</string>
+    <string name="app_title">RoboConnect</string>
+    <string name="app_subtitle">Centralized Robotic Fleet Management</string>
+    
+    <!-- Login -->
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="forgot_password">Forgot Password?</string>
+    
+    <!-- Robot List -->
+    <string name="my_robots">My Robots</string>
+    <string name="no_robots">No robots found. Tap + to add a robot.</string>
+    <string name="add_robot">Add Robot</string>
+    <string name="action_logout">Logout</string>
+    <string name="action_refresh">Refresh</string>
+    
+    <!-- Pairing -->
+    <string name="pair_robot">Pair Robot</string>
+    <string name="scan_devices">Scan for Devices</string>
+    <string name="ready_to_scan">Ready to scan</string>
+    <string name="scanning">Scanning for devices...</string>
+    <string name="scan_complete">Scan complete</string>
+    <string name="robot_details">Robot Details</string>
+    <string name="robot_name">Robot Name</string>
+    <string name="robot_type">Robot Type</string>
+    <string name="add">Add</string>
+    <string name="cancel">Cancel</string>
+    
+    <!-- Control -->
+    <string name="connect">Connect</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="connected">Connected</string>
+    <string name="disconnected">Disconnected</string>
+    <string name="connecting">Connecting...</string>
+    <string name="movement_controls">Movement Controls</string>
+    <string name="forward">Forward</string>
+    <string name="backward">Backward</string>
+    <string name="left">Left</string>
+    <string name="right">Right</string>
+    <string name="stop">STOP</string>
+    <string name="speed">Speed</string>
+    <string name="speed_control">Speed Control</string>
+    <string name="servo_controls">Servo Controls</string>
+    <string name="servo_1">Servo 1</string>
+    <string name="servo_2">Servo 2</string>
+    <string name="servo_a">Servo A</string>
+    <string name="servo_b">Servo B</string>
+    <string name="connection_status">Connection Status</string>
+    <string name="connection_type">Connection Type</string>
+    <string name="status_connected">Connected</string>
+    <string name="status_disconnected">Disconnected</string>
+    <string name="robot_icon">Robot Icon</string>
+    <string name="last_connected">Last Connected</string>
+    <string name="login_subtitle">Connect and Control Your Robot Fleet</string>
+    
+    <!-- Settings -->
+    <string name="robot_settings">Robot Settings</string>
+    <string name="robot_info">Robot Information</string>
+    <string name="name">Name</string>
+    <string name="type">Type</string>
+    <string name="mac_address">MAC Address</string>
+    <string name="permissions">Permissions</string>
+    <string name="add_permission">Add Permission</string>
+    <string name="revoke_permission">Revoke Permission</string>
+    <string name="revoke">Revoke</string>
+    <string name="danger_zone">Danger Zone</string>
+    <string name="delete_robot">Delete Robot</string>
+    <string name="confirm_delete_robot">Are you sure you want to delete this robot? This action cannot be undone.</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="grant_access">Grant Access</string>
+    <string name="enter_user_email">Enter the email of the user you want to grant access to</string>
+</resources>

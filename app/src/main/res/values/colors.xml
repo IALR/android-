@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base colors -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    
+    <!-- Robotics Theme - Primary Colors -->
+    <color name="robot_blue_primary">#1E88E5</color>
+    <color name="robot_blue_dark">#1565C0</color>
+    <color name="robot_blue_light">#42A5F5</color>
+    <color name="robot_blue_extra_light">#64B5F6</color>
+    
+    <!-- Tech Accent Colors -->
+    <color name="tech_orange">#FF6F00</color>
+    <color name="tech_orange_light">#FF8F00</color>
+    <color name="neon_green">#00E676</color>
+    <color name="cyber_purple">#7C4DFF</color>
+    <color name="electric_blue">#00B0FF</color>
+    
+    <!-- Status Colors -->
+    <color name="status_connected">#00E676</color>
+    <color name="status_disconnected">#FF5252</color>
+    <color name="status_warning">#FFD740</color>
+    <color name="status_pairing">#40C4FF</color>
+    
+    <!-- Background Colors - Light Theme -->
+    <color name="background_primary">#F5F7FA</color>
+    <color name="background_secondary">#FFFFFF</color>
+    <color name="background_card">#FFFFFF</color>
+    <color name="surface">#FFFFFF</color>
+    
+    <!-- Background Colors - Dark Theme -->
+    <color name="dark_background_primary">#121212</color>
+    <color name="dark_background_secondary">#1E1E1E</color>
+    <color name="dark_background_card">#2C2C2C</color>
+    <color name="dark_surface">#1E1E1E</color>
+    
+    <!-- Text Colors - Light Theme -->
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#757575</color>
+    <color name="text_tertiary">#BDBDBD</color>
+    <color name="text_on_primary">#FFFFFF</color>
+    
+    <!-- Text Colors - Dark Theme -->
+    <color name="dark_text_primary">#FFFFFF</color>
+    <color name="dark_text_secondary">#B0B0B0</color>
+    <color name="dark_text_tertiary">#757575</color>
+    
+    <!-- Gradient Colors -->
+    <color name="gradient_start">#1E88E5</color>
+    <color name="gradient_end">#7C4DFF</color>
+    <color name="gradient_orange_start">#FF6F00</color>
+    <color name="gradient_orange_end">#FF8F00</color>
+    
+    <!-- Control Button Colors -->
+    <color name="control_forward">#00E676</color>
+    <color name="control_backward">#FFD740</color>
+    <color name="control_left">#40C4FF</color>
+    <color name="control_right">#40C4FF</color>
+    <color name="control_stop">#FF5252</color>
+    
+    <!-- Shadow & Overlay -->
+    <color name="shadow_light">#1A000000</color>
+    <color name="shadow_medium">#33000000</color>
+    <color name="shadow_dark">#4D000000</color>
+    <color name="overlay_dark">#80000000</color>
+    
+    <!-- Divider Colors -->
+    <color name="divider_light">#E0E0E0</color>
+    <color name="divider_dark">#424242</color>
+    
+    <!-- Legacy compatibility -->
+    <color name="primary">#1E88E5</color>
+    <color name="primary_dark">#1565C0</color>
+    <color name="primary_light">#BBDEFB</color>
+    <color name="accent">#FF6F00</color>
+    <color name="accent_dark">#E64A19</color>
+    <color name="background">#F5F7FA</color>
+    <color name="card_background">#FFFFFF</color>
+    <color name="success">#00E676</color>
+    <color name="error">#FF5252</color>
+    <color name="warning">#FFD740</color>
+    <color name="button_primary">#1E88E5</color>
+    <color name="button_secondary">#E3F2FD</color>
+    <color name="button_danger">#FF5252</color>
+    
+    <!-- Additional Text Colors -->
+    <color name="text_secondary_light">#9E9E9E</color>
+    <color name="text_hint">#BDBDBD</color>
+    <color name="text_primary_dark">#212121</color>
+    
+    <!-- Error Colors -->
+    <color name="error_light">#FF8A80</color>
+</resources>
