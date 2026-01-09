@@ -116,6 +116,20 @@ public class RobotListActivity extends AppCompatActivity implements RobotAdapter
 
     @Override
     public void onRobotClick(Robot robot) {
+        if (robot == null) return;
+
+        // WiFi robots must use the WiFi control screen (ControlActivity is Bluetooth-only)
+        if ("wifi".equalsIgnoreCase(robot.getConnectionType())) {
+            Intent intent = new Intent(RobotListActivity.this, RobotControlActivity.class);
+            intent.putExtra("robot_id", robot.getId());
+            intent.putExtra("robot_name", robot.getName());
+            intent.putExtra("robot_ip", robot.getIpAddress());
+            intent.putExtra("robot_port", 8888);
+            intent.putExtra("robot_ssid", robot.getMacAddress());
+            startActivity(intent);
+            return;
+        }
+
         Intent intent = new Intent(RobotListActivity.this, ControlActivity.class);
         intent.putExtra("robot_id", robot.getId());
         intent.putExtra("robot_name", robot.getName());

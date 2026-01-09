@@ -8,6 +8,8 @@ import android.net.NetworkRequest;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiNetworkSpecifier;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Looper;
 
 import androidx.annotation.NonNull;
 
@@ -19,6 +21,9 @@ public class WiFiManager {
     private Context context;
     private android.net.wifi.WifiManager wifiManager;
     private ConnectivityManager connectivityManager;
+
+    private ConnectivityManager.NetworkCallback activeNetworkCallback;
+    private final Handler mainHandler = new Handler(Looper.getMainLooper());
     
     public interface ConnectionCallback {
         void onConnected(Network network);
@@ -39,6 +44,16 @@ public class WiFiManager {
      * Different methods for different Android versions
      */
     public void connectToWiFi(String ssid, String password, ConnectionCallback callback) {
+        // Fast-path: if we're already on that SSID, don't request again.
+        try {
+            String current = getCurrentSSID();
+            if (current != null && current.equals(ssid)) {
+                callback.onConnected(null);
+                return;
+            }
+        } catch (Exception ignored) {
+        }
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             // Android 10+ - Use WifiNetworkSpecifier
             connectToWiFiModern(ssid, password, callback);
@@ -53,6 +68,9 @@ public class WiFiManager {
      */
     private void connectToWiFiModern(String ssid, String password, ConnectionCallback callback) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            // Clean up any previous request.
+            disconnect();
+
             WifiNetworkSpecifier.Builder builder = new WifiNetworkSpecifier.Builder()
                     .setSsid(ssid)
                     .setWpa2Passphrase(password);
@@ -61,14 +79,30 @@ public class WiFiManager {
             
             NetworkRequest.Builder requestBuilder = new NetworkRequest.Builder()
                     .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
+                    // ESP32 AP usually has no Internet; avoid waiting for Internet validation.
+                    .removeCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
                     .setNetworkSpecifier(wifiNetworkSpecifier);
             
             NetworkRequest networkRequest = requestBuilder.build();
+
+            final Runnable timeout = () -> {
+                try {
+                    if (activeNetworkCallback != null) {
+                        connectivityManager.unregisterNetworkCallback(activeNetworkCallback);
+                    }
+                } catch (Exception ignored) {
+                }
+                activeNetworkCallback = null;
+                callback.onConnectionFailed("Connection timed out. Accept the WiFi prompt and try again.");
+            };
+
+            mainHandler.postDelayed(timeout, 15000);
             
             ConnectivityManager.NetworkCallback networkCallback = new ConnectivityManager.NetworkCallback() {
                 @Override
                 public void onAvailable(@NonNull Network network) {
                     super.onAvailable(network);
+                    mainHandler.removeCallbacks(timeout);
                     connectivityManager.bindProcessToNetwork(network);
                     callback.onConnected(network);
                 }
@@ -76,6 +110,7 @@ public class WiFiManager {
                 @Override
                 public void onUnavailable() {
                     super.onUnavailable();
+                    mainHandler.removeCallbacks(timeout);
                     callback.onConnectionFailed("Network unavailable");
                 }
                 
@@ -86,7 +121,18 @@ public class WiFiManager {
                 }
             };
             
-            connectivityManager.requestNetwork(networkRequest, networkCallback);
+            activeNetworkCallback = networkCallback;
+            try {
+                connectivityManager.requestNetwork(networkRequest, networkCallback);
+            } catch (SecurityException se) {
+                mainHandler.removeCallbacks(timeout);
+                activeNetworkCallback = null;
+                callback.onConnectionFailed("WiFi permission denied. Grant Nearby WiFi / Location permission and try again.");
+            } catch (IllegalArgumentException iae) {
+                mainHandler.removeCallbacks(timeout);
+                activeNetworkCallback = null;
+                callback.onConnectionFailed("WiFi request failed: " + iae.getMessage());
+            }
         }
     }
     
@@ -94,23 +140,29 @@ public class WiFiManager {
      * Legacy WiFi connection (Android 9 and below)
      */
     private void connectToWiFiLegacy(String ssid, String password, ConnectionCallback callback) {
-        WifiConfiguration wifiConfig = new WifiConfiguration();
-        wifiConfig.SSID = String.format("\"%s\"", ssid);
-        wifiConfig.preSharedKey = String.format("\"%s\"", password);
-        
-        int netId = wifiManager.addNetwork(wifiConfig);
-        if (netId != -1) {
-            wifiManager.disconnect();
-            boolean enabled = wifiManager.enableNetwork(netId, true);
-            boolean reconnected = wifiManager.reconnect();
-            
-            if (enabled && reconnected) {
-                callback.onConnected(null);
+        try {
+            WifiConfiguration wifiConfig = new WifiConfiguration();
+            wifiConfig.SSID = String.format("\"%s\"", ssid);
+            wifiConfig.preSharedKey = String.format("\"%s\"", password);
+
+            int netId = wifiManager.addNetwork(wifiConfig);
+            if (netId != -1) {
+                wifiManager.disconnect();
+                boolean enabled = wifiManager.enableNetwork(netId, true);
+                boolean reconnected = wifiManager.reconnect();
+
+                if (enabled && reconnected) {
+                    callback.onConnected(null);
+                } else {
+                    callback.onConnectionFailed("Failed to connect to network");
+                }
             } else {
-                callback.onConnectionFailed("Failed to connect to network");
+                callback.onConnectionFailed("Failed to add network configuration");
             }
-        } else {
-            callback.onConnectionFailed("Failed to add network configuration");
+        } catch (SecurityException se) {
+            callback.onConnectionFailed("WiFi permission denied");
+        } catch (Exception e) {
+            callback.onConnectionFailed("WiFi connect error: " + e.getMessage());
         }
     }
     
@@ -118,8 +170,25 @@ public class WiFiManager {
      * Disconnect from current WiFi
      */
     public void disconnect() {
+        if (connectivityManager != null) {
+            try {
+                if (activeNetworkCallback != null) {
+                    connectivityManager.unregisterNetworkCallback(activeNetworkCallback);
+                }
+            } catch (Exception ignored) {
+            }
+            activeNetworkCallback = null;
+            try {
+                connectivityManager.bindProcessToNetwork(null);
+            } catch (Exception ignored) {
+            }
+        }
+
         if (wifiManager != null) {
-            wifiManager.disconnect();
+            try {
+                wifiManager.disconnect();
+            } catch (Exception ignored) {
+            }
         }
     }
     

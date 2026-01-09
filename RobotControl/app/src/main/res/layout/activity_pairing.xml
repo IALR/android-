@@ -47,12 +47,23 @@
                     android:id="@+id/scanButton"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/button_height"
-                    android:text="@string/scan_devices"
+                    android:text="@string/scan_bluetooth"
                     android:background="@drawable/bg_button_primary_modern"
                     android:textAppearance="@style/TextAppearance.Button"
                     android:textColor="@android:color/white"
                     android:drawableStart="@drawable/ic_bluetooth"
                     android:drawablePadding="@dimen/padding_small"
+                    android:layout_marginBottom="@dimen/margin_small"
+                    android:elevation="@dimen/elevation_medium" />
+
+                <Button
+                    android:id="@+id/scanWifiButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/button_height"
+                    android:text="@string/scan_wifi"
+                    android:background="@drawable/bg_button_primary_modern"
+                    android:textAppearance="@style/TextAppearance.Button"
+                    android:textColor="@android:color/white"
                     android:layout_marginBottom="@dimen/margin_small"
                     android:elevation="@dimen/elevation_medium" />
 

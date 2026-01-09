@@ -69,9 +69,13 @@ public class WifiAPScanner {
         
         for (ScanResult result : results) {
             String ssid = result.SSID;
-            if (ssid != null && (ssid.startsWith("ROBOT_") || 
-                                ssid.startsWith("ESP_") || 
-                                ssid.startsWith("Arduino_"))) {
+            if (ssid != null && (
+                    ssid.equalsIgnoreCase("Robot_AP") ||
+                    ssid.startsWith("ROBOT_") ||
+                    ssid.startsWith("Robot") ||
+                    ssid.startsWith("ESP_") ||
+                    ssid.startsWith("Arduino_")
+            )) {
                 robotAPs.add(result);
             }
         }
