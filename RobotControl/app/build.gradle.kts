@@ -47,6 +47,15 @@ dependencies {
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("androidx.coordinatorlayout:coordinatorlayout:1.2.0")
     
+    // ViewPager2 for education content
+    implementation("androidx.viewpager2:viewpager2:1.1.0")
+    
+    // Material Components (for TabLayout and modern UI)
+    implementation("com.google.android.material:material:1.11.0")
+    
+    // Fragment support
+    implementation("androidx.fragment:fragment:1.6.2")
+    
     // Firebase for authentication and database
     implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
     implementation("com.google.firebase:firebase-auth")

@@ -57,11 +57,23 @@
             android:name=".SettingsActivity"
             android:exported="false" />
         
-        <!-- Original MainActivity (kept for reference) -->
+        <!-- Main Dashboard Activity -->
         <activity
             android:name=".MainActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false" />
+        
+        <!-- Education Activity -->
+        <activity
+            android:name=".EducationActivity"
+            android:exported="false"
+            android:label="Learn Robotics"
+            android:parentActivityName=".MainActivity" />
+        
+        <!-- Auto Reconnect Service -->
+        <service
+            android:name=".services.AutoReconnectService"
+            android:enabled="true"
+            android:exported="false" />
     </application>
 
 </manifest>

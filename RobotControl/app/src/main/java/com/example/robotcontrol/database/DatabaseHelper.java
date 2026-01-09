@@ -16,13 +16,14 @@ import java.util.UUID;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "RoboConnect.db";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     // Table names
     private static final String TABLE_ROBOTS = "robots";
     private static final String TABLE_CREDENTIALS = "credentials";
     private static final String TABLE_USERS = "users";
     private static final String TABLE_PERMISSIONS = "permissions";
+    private static final String TABLE_LEARNING_PROGRESS = "learning_progress";
 
     // Robots table columns
     private static final String KEY_ID = "id";
@@ -50,6 +51,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String KEY_USER_EMAIL = "user_email";
     private static final String KEY_CAN_CONTROL = "can_control";
     private static final String KEY_GRANTED_AT = "granted_at";
+
+    // Learning Progress table columns
+    private static final String KEY_PROGRESS_ID = "progress_id";
+    private static final String KEY_TOPIC = "topic";
+    private static final String KEY_COMPLETED = "completed";
+    private static final String KEY_SCORE = "score";
+    private static final String KEY_TIMESTAMP = "timestamp";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -90,10 +98,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + KEY_GRANTED_AT + " INTEGER"
                 + ")";
 
+        String CREATE_LEARNING_PROGRESS_TABLE = "CREATE TABLE " + TABLE_LEARNING_PROGRESS + "("
+                + KEY_PROGRESS_ID + " TEXT PRIMARY KEY,"
+                + KEY_USER_ID + " TEXT,"
+                + KEY_TOPIC + " TEXT,"
+                + KEY_COMPLETED + " INTEGER,"
+                + KEY_SCORE + " INTEGER,"
+                + KEY_TIMESTAMP + " INTEGER"
+                + ")";
+
         db.execSQL(CREATE_ROBOTS_TABLE);
         db.execSQL(CREATE_CREDENTIALS_TABLE);
         db.execSQL(CREATE_USERS_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_LEARNING_PROGRESS);
         db.execSQL(CREATE_PERMISSIONS_TABLE);
+        db.execSQL(CREATE_LEARNING_PROGRESS_TABLE);
     }
 
     @Override
