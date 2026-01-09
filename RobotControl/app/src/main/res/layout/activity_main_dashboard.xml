@@ -39,7 +39,7 @@
             android:layout_marginBottom="16dp"
             app:cardCornerRadius="16dp"
             app:cardElevation="4dp"
-            android:backgroundTint="@color/accent_primary">
+            app:cardBackgroundColor="@color/accent_primary">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -52,7 +52,8 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:src="@drawable/ic_bluetooth"
-                    android:tint="@color/white"/>
+                    android:tint="@color/white"
+                    android:contentDescription="Bluetooth Icon"/>
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -81,11 +82,12 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/ic_arrow_right"
-                    android:tint="@color/white"/>
+                    android:tint="@color/white"
+                    android:contentDescription="Arrow Right"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Feature Cards Grid -->
+        <!-- Features Header -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -101,7 +103,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Robot List Card -->
+            <!-- My Robots Card -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardRobotList"
                 android:layout_width="match_parent"
@@ -109,7 +111,7 @@
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="2dp"
-                android:backgroundTint="@color/card_background">
+                app:cardBackgroundColor="@color/card_background">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -122,7 +124,8 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:src="@drawable/ic_robot_full"
-                        android:tint="@color/accent_primary"/>
+                        android:tint="@color/accent_primary"
+                        android:contentDescription="Robot Icon"/>
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -151,11 +154,12 @@
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:src="@drawable/ic_arrow_right"
-                        android:tint="@color/text_secondary"/>
+                        android:tint="@color/text_secondary"
+                        android:contentDescription="Arrow Right"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Education Card -->
+            <!-- Learn Robotics Card -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardEducation"
                 android:layout_width="match_parent"
@@ -163,7 +167,7 @@
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="2dp"
-                android:backgroundTint="@color/card_background">
+                app:cardBackgroundColor="@color/card_background">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -176,7 +180,8 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:src="@drawable/ic_circuit_pattern"
-                        android:tint="@color/accent_primary"/>
+                        android:tint="@color/accent_primary"
+                        android:contentDescription="Circuit Icon"/>
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -191,12 +196,12 @@
                             android:text="Learn Robotics"
                             android:textSize="16sp"
                             android:textStyle="bold"
-                            android:textColor="@color/text_primary"/>
+                            android:textColor="@color/black"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Educational content & quizzes"
+                            android:text="Educational content &amp; quizzes"
                             android:textSize="14sp"
                             android:textColor="@color/text_secondary"/>
                     </LinearLayout>
@@ -205,7 +210,8 @@
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:src="@drawable/ic_arrow_right"
-                        android:tint="@color/text_secondary"/>
+                        android:tint="@color/text_secondary"
+                        android:contentDescription="Arrow Right"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -217,7 +223,7 @@
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="2dp"
-                android:backgroundTint="@color/card_background">
+                app:cardBackgroundColor="@color/card_background">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -230,7 +236,8 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:src="@drawable/ic_status_active"
-                        android:tint="@color/accent_primary"/>
+                        android:tint="@color/accent_primary"
+                        android:contentDescription="Settings Icon"/>
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -250,7 +257,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="App preferences & permissions"
+                            android:text="App preferences and permissions"
                             android:textSize="14sp"
                             android:textColor="@color/text_secondary"/>
                     </LinearLayout>
@@ -259,7 +266,8 @@
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:src="@drawable/ic_arrow_right"
-                        android:tint="@color/text_secondary"/>
+                        android:tint="@color/text_secondary"
+                        android:contentDescription="Arrow Right"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
