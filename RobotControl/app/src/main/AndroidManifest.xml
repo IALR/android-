@@ -79,14 +79,14 @@
         <activity
             android:name=".RobotControlActivity"
             android:exported="false"
-            android:label="Robot WiFi Control"
+            android:label="@string/robot_wifi_control_label"
             android:parentActivityName=".MainActivity" />
         
         <!-- Education Activity -->
         <activity
             android:name=".EducationActivity"
             android:exported="false"
-            android:label="Learn Robotics"
+            android:label="@string/education_activity_label"
             android:parentActivityName=".MainActivity" />
         
         <!-- Auto Reconnect Service -->

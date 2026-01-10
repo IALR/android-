@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RoboConnect</string>
+    <string name="app_title">RoboConnect</string>
+    <string name="app_subtitle">Gestion centralisée de flotte robotique</string>
+
+    <!-- Login -->
+    <string name="email">E-mail</string>
+    <string name="password">Mot de passe</string>
+    <string name="login">Connexion</string>
+    <string name="register">S’inscrire</string>
+    <string name="forgot_password">Mot de passe oublié ?</string>
+
+    <!-- Robot List -->
+    <string name="my_robots">Mes robots</string>
+    <string name="no_robots">Aucun robot trouvé. Appuyez sur + pour ajouter un robot.</string>
+    <string name="add_robot">Ajouter un robot</string>
+    <string name="action_logout">Déconnexion</string>
+    <string name="action_refresh">Actualiser</string>
+
+    <!-- Pairing -->
+    <string name="pair_robot">Appairer le robot</string>
+    <string name="scan_devices">Rechercher des appareils</string>
+    <string name="scan_bluetooth">Scanner Bluetooth</string>
+    <string name="scan_wifi">Scanner Wi‑Fi</string>
+    <string name="scanning_bluetooth">Recherche d’appareils Bluetooth...</string>
+    <string name="scanning_wifi">Recherche de réseaux Wi‑Fi...</string>
+    <string name="ready_to_scan">Prêt à scanner</string>
+    <string name="scanning">Recherche d’appareils...</string>
+    <string name="scan_complete">Scan terminé</string>
+    <string name="robot_details">Détails du robot</string>
+    <string name="robot_name">Nom du robot</string>
+    <string name="robot_type">Type de robot</string>
+    <string name="add">Ajouter</string>
+    <string name="cancel">Annuler</string>
+
+    <!-- Control -->
+    <string name="connect">Connecter</string>
+    <string name="disconnect">Déconnecter</string>
+    <string name="connected">Connecté</string>
+    <string name="disconnected">Déconnecté</string>
+    <string name="connecting">Connexion...</string>
+    <string name="movement_controls">Commandes de mouvement</string>
+    <string name="forward">Avancer</string>
+    <string name="backward">Reculer</string>
+    <string name="left">Gauche</string>
+    <string name="right">Droite</string>
+    <string name="stop">STOP</string>
+    <string name="speed">Vitesse</string>
+    <string name="speed_control">Contrôle de la vitesse</string>
+    <string name="servo_controls">Commandes des servos</string>
+    <string name="servo_1">Servo 1</string>
+    <string name="servo_2">Servo 2</string>
+    <string name="servo_a">Servo A</string>
+    <string name="servo_b">Servo B</string>
+    <string name="connection_status">État de connexion</string>
+    <string name="connection_type">Type de connexion</string>
+    <string name="status_connected">Connecté</string>
+    <string name="status_disconnected">Déconnecté</string>
+    <string name="robot_icon">Icône du robot</string>
+    <string name="last_connected">Dernière connexion</string>
+    <string name="login_subtitle">Connectez et contrôlez votre flotte de robots</string>
+
+    <!-- Dashboard / Home -->
+    <string name="dashboard_welcome_default">Bienvenue sur RoboConnect !</string>
+    <string name="dashboard_tagline">Contrôlez votre robot et apprenez la robotique</string>
+    <string name="dashboard_quick_connect">Connexion rapide</string>
+    <string name="dashboard_pair_with_robot">Appairer votre robot</string>
+    <string name="dashboard_features">Fonctionnalités</string>
+    <string name="dashboard_manage_robots">Gérez vos robots</string>
+    <string name="dashboard_learn_robotics">Apprendre la robotique</string>
+    <string name="dashboard_education_desc">Contenu éducatif &amp; quiz</string>
+    <string name="dashboard_settings">Paramètres</string>
+    <string name="dashboard_settings_desc">Préférences et autorisations</string>
+    <string name="dashboard_get_started">Commencer</string>
+
+    <!-- Quiz -->
+    <string name="quiz_title">Quiz</string>
+    <string name="quiz_label_question">Question</string>
+    <string name="quiz_select_answer">Choisissez votre réponse :</string>
+    <string name="quiz_option_1">Option 1</string>
+    <string name="quiz_option_2">Option 2</string>
+    <string name="quiz_option_3">Option 3</string>
+    <string name="quiz_option_4">Option 4</string>
+    <string name="quiz_submit">Valider</string>
+    <string name="quiz_next">Question suivante</string>
+    <string name="quiz_toast_select_answer">Veuillez sélectionner une réponse</string>
+    <string name="quiz_toast_correct">Correct !</string>
+    <string name="quiz_toast_wrong">Faux ! La bonne réponse : %1$s</string>
+
+    <string name="quiz_complete_format">Quiz terminé !\n\nVotre score : %1$d/%2$d</string>
+    <string name="quiz_data_invalid">Les données du quiz sont invalides. Veuillez mettre à jour les questions/options.</string>
+
+    <!-- Common UI -->
+    <string name="command_none">Commande : (aucune)</string>
+    <string name="motor_control">Contrôle moteur</string>
+    <string name="servo_control">Contrôle des servos</string>
+
+    <!-- WiFi control screen -->
+    <string name="robot_control_title">Contrôle du robot</string>
+    <string name="robot_wifi_control_label">Contrôle Wi‑Fi du robot</string>
+    <string name="wifi_connection">Connexion</string>
+    <string name="wifi_scan_for_robots">Scanner les robots</string>
+    <string name="status_disconnected_label">Statut : déconnecté</string>
+
+    <!-- Pairing -->
+    <string name="available_devices">Appareils disponibles</string>
+
+    <!-- Bluetooth Serial Commands (Servo Robot) -->
+    <string name="test_servos">Tester les servos</string>
+
+    <!-- Settings -->
+    <string name="robot_settings">Paramètres du robot</string>
+
+    <!-- App Settings -->
+    <string name="app_settings">Paramètres de l’application</string>
+    <string name="pref_category_general">Général</string>
+
+    <string name="pref_language_title">Langue</string>
+    <string name="pref_language_summary">Choisissez la langue de l’application</string>
+    <string name="pref_language_english">Anglais</string>
+    <string name="pref_language_french">Français</string>
+    <string name="pref_language_spanish">Espagnol</string>
+
+    <string name="pref_theme_title">Thème</string>
+    <string name="pref_theme_summary">Choisissez clair, sombre, ou le système</string>
+    <string name="pref_theme_system">Par défaut (système)</string>
+    <string name="pref_theme_light">Clair</string>
+    <string name="pref_theme_dark">Sombre</string>
+
+    <string name="robot_info">Informations du robot</string>
+    <string name="name">Nom</string>
+    <string name="type">Type</string>
+    <string name="mac_address">Adresse</string>
+    <string name="ip_address">Adresse IP</string>
+    <string name="permissions">Autorisations</string>
+    <string name="add_permission">Ajouter une autorisation</string>
+    <string name="revoke_permission">Révoquer l’autorisation</string>
+    <string name="revoke">Révoquer</string>
+    <string name="danger_zone">Zone dangereuse</string>
+    <string name="delete_robot">Supprimer le robot</string>
+    <string name="confirm_delete_robot">Voulez-vous vraiment supprimer ce robot ? Cette action est irréversible.</string>
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
+    <string name="grant_access">Accorder l’accès</string>
+    <string name="enter_user_email">Entrez l’e-mail de l’utilisateur à qui vous voulez accorder l’accès</string>
+
+    <!-- Education -->
+    <string name="education_activity_label">Apprendre la robotique</string>
+    <string name="education_hub_title">Centre d’apprentissage</string>
+    <string name="education_subtitle">Maîtrisez les bases de la robotique et de l’électronique</string>
+
+    <string name="education_tab_electricity">Électricité</string>
+    <string name="education_tab_circuits">Circuits</string>
+    <string name="education_tab_mechatronics">Mécatronique</string>
+    <string name="education_tab_quiz">Quiz</string>
+
+    <string name="education_electricity_content">Apprenez :\n\n• Tension et courant\n• Loi d’Ohm (V = I × R)\n• Calcul de puissance\n• Circuits en série et en parallèle\n• Sécurité électrique de base</string>
+    <string name="education_circuits_content">Apprenez :\n\n• Composants (résistances, condensateurs, LED)\n• Bases de la breadboard\n• Lecture des schémas\n• Construire des circuits simples\n• Bases Arduino/microcontrôleur\n• Signaux numériques vs analogiques</string>
+    <string name="education_mechatronics_content">Apprenez :\n\n• Servomoteurs et contrôle\n• Moteurs DC et drivers\n• Capteurs (ultrason, IR, température)\n• PWM (modulation de largeur d’impulsion)\n• Cinématique du robot\n• Communication Bluetooth/Wi‑Fi\n• Assemblage et conception</string>
+
+    <!-- Toasts / messages -->
+    <string name="toast_login_success">Connexion réussie</string>
+    <string name="toast_login_invalid">E-mail ou mot de passe invalide</string>
+    <string name="toast_user_exists">Un utilisateur existe déjà avec cet e-mail</string>
+    <string name="toast_registration_success">Inscription réussie</string>
+    <string name="toast_registration_failed">Échec de l’inscription</string>
+    <string name="toast_password_reset_unavailable">La réinitialisation du mot de passe n’est pas disponible en mode hors ligne</string>
+
+    <!-- Validation errors -->
+    <string name="error_email_required">L’e-mail est requis</string>
+    <string name="error_password_required">Le mot de passe est requis</string>
+    <string name="error_password_min_length">Le mot de passe doit contenir au moins 6 caractères</string>
+    <string name="error_enter_email_first">Saisissez d’abord votre e-mail</string>
+</resources>

@@ -36,18 +36,8 @@ public class MechatronicsFragment extends Fragment {
     }
     
     private void loadContent() {
-        // Load mechatronics content
-        String content = "Learn about:\n\n" +
-                "• Servo Motors and Control\n" +
-                "• DC Motors and Motor Drivers\n" +
-                "• Sensors (Ultrasonic, IR, Temperature)\n" +
-                "• PWM (Pulse Width Modulation)\n" +
-                "• Robot Kinematics\n" +
-                "• Bluetooth/WiFi Communication\n" +
-                "• Robot Assembly and Design";
-        
         if (tvContent != null) {
-            tvContent.setText(content);
+            tvContent.setText(getString(R.string.education_mechatronics_content));
         }
     }
     

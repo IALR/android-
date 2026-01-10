@@ -6,6 +6,7 @@ public class RobotControlApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        AppSettings.applyLanguage(this);
         AppSettings.applyTheme(this);
     }
 }

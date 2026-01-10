@@ -5,6 +5,14 @@
         android:title="@string/pref_category_general">
 
         <ListPreference
+            android:key="pref_language"
+            android:title="@string/pref_language_title"
+            android:summary="@string/pref_language_summary"
+            android:defaultValue="en"
+            android:entries="@array/pref_language_entries"
+            android:entryValues="@array/pref_language_values" />
+
+        <ListPreference
             android:key="pref_theme_mode"
             android:title="@string/pref_theme_title"
             android:summary="@string/pref_theme_summary"

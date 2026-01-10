@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.example.robotcontrol.R;
 import com.example.robotcontrol.fragments.CircuitsFragment;
 import com.example.robotcontrol.fragments.ElectricityFragment;
 import com.example.robotcontrol.fragments.MechatronicsFragment;
@@ -17,9 +18,12 @@ import com.example.robotcontrol.fragments.QuizFragment;
 public class EducationPagerAdapter extends FragmentStateAdapter {
     
     private static final int NUM_PAGES = 4;
+
+    private final FragmentActivity activity;
     
     public EducationPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
+        this.activity = fragmentActivity;
     }
     
     @NonNull
@@ -50,13 +54,13 @@ public class EducationPagerAdapter extends FragmentStateAdapter {
     public String getPageTitle(int position) {
         switch (position) {
             case 0:
-                return "Electricity";
+                return activity.getString(R.string.education_tab_electricity);
             case 1:
-                return "Circuits";
+                return activity.getString(R.string.education_tab_circuits);
             case 2:
-                return "Mechatronics";
+                return activity.getString(R.string.education_tab_mechatronics);
             case 3:
-                return "Quiz";
+                return activity.getString(R.string.education_tab_quiz);
             default:
                 return "";
         }

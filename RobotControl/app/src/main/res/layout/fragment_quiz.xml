@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="📝 Quiz Time"
+            android:text="📝 quiz title"
             android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="@color/text_primary"
@@ -40,7 +40,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Question"
+                    android:text="@string/quiz_label_question"
                     android:textSize="14sp"
                     android:textColor="@color/text_secondary"
                     android:layout_marginBottom="8dp"/>
@@ -62,7 +62,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Select your answer:"
+            android:text="@string/quiz_select_answer"
             android:textSize="16sp"
             android:textColor="@color/text_primary"
             android:layout_marginBottom="12dp"/>
@@ -78,7 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:text="Option 1"
+                android:text="@string/quiz_option_1"
                 android:textSize="16sp"
                 android:textColor="@color/text_primary"
                 android:padding="16dp"
@@ -90,7 +90,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:text="Option 2"
+                android:text="@string/quiz_option_2"
                 android:textSize="16sp"
                 android:textColor="@color/text_primary"
                 android:padding="16dp"
@@ -102,7 +102,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:text="Option 3"
+                android:text="@string/quiz_option_3"
                 android:textSize="16sp"
                 android:textColor="@color/text_primary"
                 android:padding="16dp"
@@ -113,7 +113,7 @@
                 android:id="@+id/rbOption4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Option 4"
+                android:text="@string/quiz_option_4"
                 android:textSize="16sp"
                 android:textColor="@color/text_primary"
                 android:padding="16dp"
@@ -135,7 +135,7 @@
                 android:layout_height="56dp"
                 android:layout_weight="1"
                 android:layout_marginEnd="8dp"
-                android:text="Submit Answer"
+                android:text="@string/quiz_submit"
                 android:textSize="16sp"
                 android:background="@drawable/button_primary"/>
 
@@ -145,7 +145,7 @@
                 android:layout_height="56dp"
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"
-                android:text="Next Question"
+                android:text="@string/quiz_next"
                 android:textSize="16sp"
                 android:enabled="false"
                 android:background="@drawable/button_secondary"/>

@@ -17,7 +17,7 @@
             android:id="@+id/tvWelcome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Welcome to RoboConnect!"
+            android:text="@string/dashboard_welcome_default"
             android:textSize="28sp"
             android:textStyle="bold"
             android:textColor="@color/text_primary"
@@ -26,7 +26,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Control your robot and learn robotics"
+            android:text="@string/dashboard_tagline"
             android:textSize="16sp"
             android:textColor="@color/text_secondary"
             android:layout_marginBottom="32dp"/>
@@ -65,7 +65,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Quick Connect"
+                        android:text="@string/dashboard_quick_connect"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:textColor="@color/white"/>
@@ -73,7 +73,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Pair with your robot"
+                        android:text="@string/dashboard_pair_with_robot"
                         android:textSize="14sp"
                         android:textColor="@color/white"/>
                 </LinearLayout>
@@ -91,7 +91,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Features"
+            android:text="@string/dashboard_features"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/text_primary"
@@ -137,7 +137,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="My Robots"
+                            android:text="@string/my_robots"
                             android:textSize="16sp"
                             android:textStyle="bold"
                             android:textColor="@color/text_primary"/>
@@ -145,7 +145,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Manage your robots"
+                            android:text="@string/dashboard_manage_robots"
                             android:textSize="14sp"
                             android:textColor="@color/text_secondary"/>
                     </LinearLayout>
@@ -193,7 +193,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Learn Robotics"
+                            android:text="@string/dashboard_learn_robotics"
                             android:textSize="16sp"
                             android:textStyle="bold"
                             android:textColor="@color/text_primary"/>
@@ -201,7 +201,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Educational content &amp; quizzes"
+                            android:text="@string/dashboard_education_desc"
                             android:textSize="14sp"
                             android:textColor="@color/text_secondary"/>
                     </LinearLayout>
@@ -249,7 +249,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Settings"
+                            android:text="@string/dashboard_settings"
                             android:textSize="16sp"
                             android:textStyle="bold"
                             android:textColor="@color/text_primary"/>
@@ -257,7 +257,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="App preferences and permissions"
+                            android:text="@string/dashboard_settings_desc"
                             android:textSize="14sp"
                             android:textColor="@color/text_secondary"/>
                     </LinearLayout>
@@ -279,7 +279,7 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginTop="24dp"
-            android:text="Get Started"
+            android:text="@string/dashboard_get_started"
             android:textSize="16sp"
             android:textStyle="bold"
             android:background="@drawable/button_primary"/>

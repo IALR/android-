@@ -1,4 +1,16 @@
 <resources>
+    <string-array name="pref_language_entries">
+        <item>@string/pref_language_english</item>
+        <item>@string/pref_language_french</item>
+        <item>@string/pref_language_spanish</item>
+    </string-array>
+
+    <string-array name="pref_language_values">
+        <item>en</item>
+        <item>fr</item>
+        <item>es</item>
+    </string-array>
+
     <string-array name="pref_theme_entries">
         <item>@string/pref_theme_system</item>
         <item>@string/pref_theme_light</item>

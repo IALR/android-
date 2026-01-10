@@ -36,17 +36,8 @@ public class ElectricityFragment extends Fragment {
     }
     
     private void loadContent() {
-        // Load electricity content
-        // This can be enhanced with database or JSON content
-        String content = "Learn about:\n\n" +
-                "• Voltage and Current\n" +
-                "• Ohm's Law (V = I × R)\n" +
-                "• Power Calculations\n" +
-                "• Series and Parallel Circuits\n" +
-                "• Basic Electrical Safety";
-        
         if (tvContent != null) {
-            tvContent.setText(content);
+            tvContent.setText(getString(R.string.education_electricity_content));
         }
     }
     

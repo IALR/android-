@@ -36,17 +36,8 @@ public class CircuitsFragment extends Fragment {
     }
     
     private void loadContent() {
-        // Load circuits content
-        String content = "Learn about:\n\n" +
-                "• Circuit Components (Resistors, Capacitors, LEDs)\n" +
-                "• Breadboard Basics\n" +
-                "• Reading Circuit Diagrams\n" +
-                "• Building Simple Circuits\n" +
-                "• Arduino/Microcontroller Basics\n" +
-                "• Digital vs Analog Signals";
-        
         if (tvContent != null) {
-            tvContent.setText(content);
+            tvContent.setText(getString(R.string.education_circuits_content));
         }
     }
     

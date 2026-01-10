@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         if (TextUtils.isEmpty(password)) {
-            passwordEditText.setError("Password is required");
+            passwordEditText.setError(getString(R.string.error_password_required));
             return;
         }
 
@@ -86,10 +86,10 @@ public class LoginActivity extends AppCompatActivity {
             editor.putBoolean(KEY_IS_LOGGED_IN, true);
             editor.apply();
             
-            Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.toast_login_success), Toast.LENGTH_SHORT).show();
             navigateToMain();
         } else {
-            Toast.makeText(this, "Invalid email or password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.toast_login_invalid), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -98,17 +98,17 @@ public class LoginActivity extends AppCompatActivity {
         String password = passwordEditText.getText().toString().trim();
 
         if (TextUtils.isEmpty(email)) {
-            emailEditText.setError("Email is required");
+            emailEditText.setError(getString(R.string.error_email_required));
             return;
         }
 
         if (TextUtils.isEmpty(password)) {
-            passwordEditText.setError("Password is required");
+            passwordEditText.setError(getString(R.string.error_password_required));
             return;
         }
 
         if (password.length() < 6) {
-            passwordEditText.setError("Password must be at least 6 characters");
+            passwordEditText.setError(getString(R.string.error_password_min_length));
             return;
         }
 
@@ -119,7 +119,7 @@ public class LoginActivity extends AppCompatActivity {
         
         if (existingUser != null) {
             progressBar.setVisibility(View.GONE);
-            Toast.makeText(this, "User already exists with this email", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.toast_user_exists), Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -139,10 +139,10 @@ public class LoginActivity extends AppCompatActivity {
             editor.putBoolean(KEY_IS_LOGGED_IN, true);
             editor.apply();
             
-            Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.toast_registration_success), Toast.LENGTH_SHORT).show();
             navigateToMain();
         } else {
-            Toast.makeText(this, "Registration failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.toast_registration_failed), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -150,11 +150,11 @@ public class LoginActivity extends AppCompatActivity {
         String email = emailEditText.getText().toString().trim();
 
         if (TextUtils.isEmpty(email)) {
-            emailEditText.setError("Enter your email first");
+            emailEditText.setError(getString(R.string.error_enter_email_first));
             return;
         }
 
-        Toast.makeText(this, "Password reset is not available in offline mode", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.toast_password_reset_unavailable), Toast.LENGTH_SHORT).show();
     }
 
     private void navigateToMain() {

@@ -22,13 +22,6 @@ public class EducationActivity extends AppCompatActivity {
     private EducationPagerAdapter pagerAdapter;
     private TextView tvTitle;
     
-    private final String[] tabTitles = {
-        "Electricity",
-        "Circuits",
-        "Mechatronics",
-        "Quiz"
-    };
-    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,13 +39,13 @@ public class EducationActivity extends AppCompatActivity {
         
         // Set title
         if (tvTitle != null) {
-            tvTitle.setText("Learn Robotics");
+            tvTitle.setText(getString(R.string.education_activity_label));
         }
         
         // Enable back button
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle("Education Hub");
+            getSupportActionBar().setTitle(getString(R.string.education_hub_title));
         }
     }
     
@@ -82,7 +75,7 @@ public class EducationActivity extends AppCompatActivity {
     private void setupTabLayout() {
         // Connect TabLayout with ViewPager2
         new TabLayoutMediator(tabLayout, viewPager,
-                (tab, position) -> tab.setText(tabTitles[position])
+            (tab, position) -> tab.setText(pagerAdapter.getPageTitle(position))
         ).attach();
         
         // Add icons to tabs (optional)

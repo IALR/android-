@@ -35,18 +35,8 @@ public class QuizFragment extends Fragment {
     private static final String KEY_ANSWERED = "quiz_answered";
     private static final String KEY_CHECKED_ID = "quiz_checked_id";
     
-    // Sample questions - can be loaded from database
-    private String[] questions = {
-        "What is Ohm's Law?",
-        "What does LED stand for?",
-        "Which sensor is used to measure distance?"
-    };
-    
-    private String[][] options = {
-        {"V = I × R", "P = V × I", "R = V + I", "I = V - R"},
-        {"Light Emitting Diode", "Low Energy Device", "Long Electric Display", "Linear Electronic Driver"},
-        {"Temperature Sensor", "Ultrasonic Sensor", "Pressure Sensor", "Humidity Sensor"}
-    };
+    private String[] questions;
+    private String[][] options;
     
     private int[] correctAnswers = {0, 0, 1}; // Index of correct answer
     
@@ -57,6 +47,7 @@ public class QuizFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_quiz, container, false);
         
         initializeViews(view);
+        loadQuizData();
         setupListeners();
 
         if (!isQuizDataValid()) {
@@ -101,6 +92,22 @@ public class QuizFragment extends Fragment {
         btnSubmit.setOnClickListener(v -> checkAnswer());
         btnNext.setOnClickListener(v -> nextQuestion());
     }
+
+    private void loadQuizData() {
+        questions = getResources().getStringArray(R.array.quiz_questions);
+
+        int[] optionResIds = new int[]{
+                R.array.quiz_q1_options,
+                R.array.quiz_q2_options,
+                R.array.quiz_q3_options
+        };
+
+        options = new String[questions.length][4];
+        for (int i = 0; i < questions.length; i++) {
+            String[] row = getResources().getStringArray(optionResIds[i]);
+            options[i] = row;
+        }
+    }
     
     private void renderQuestion(boolean clearSelection) {
         if (currentQuestion < 0) currentQuestion = 0;
@@ -126,7 +133,7 @@ public class QuizFragment extends Fragment {
     private void checkAnswer() {
         int selectedId = rgOptions.getCheckedRadioButtonId();
         if (selectedId == -1) {
-            Toast.makeText(getContext(), "Please select an answer", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), getString(R.string.quiz_toast_select_answer), Toast.LENGTH_SHORT).show();
             return;
         }
         
@@ -138,10 +145,10 @@ public class QuizFragment extends Fragment {
         
         if (selectedIndex == correctAnswers[currentQuestion]) {
             score++;
-            Toast.makeText(getContext(), "Correct!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), getString(R.string.quiz_toast_correct), Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(getContext(), "Wrong! Correct answer: " + 
-                options[currentQuestion][correctAnswers[currentQuestion]], Toast.LENGTH_LONG).show();
+            String correctText = options[currentQuestion][correctAnswers[currentQuestion]];
+            Toast.makeText(getContext(), getString(R.string.quiz_toast_wrong, correctText), Toast.LENGTH_LONG).show();
         }
 
         isQuestionAnswered = true;
@@ -154,7 +161,7 @@ public class QuizFragment extends Fragment {
     }
     
     private void showResults() {
-        tvQuestion.setText("Quiz Complete!\n\nYour Score: " + score + "/" + questions.length);
+        tvQuestion.setText(getString(R.string.quiz_complete_format, score, questions.length));
         rgOptions.setVisibility(View.GONE);
         btnSubmit.setVisibility(View.GONE);
         btnNext.setVisibility(View.GONE);
@@ -196,7 +203,7 @@ public class QuizFragment extends Fragment {
     }
 
     private void showInvalidQuizData() {
-        tvQuestion.setText("Quiz data is invalid. Please update the questions/options.");
+        tvQuestion.setText(getString(R.string.quiz_data_invalid));
         rgOptions.setVisibility(View.GONE);
         btnSubmit.setVisibility(View.GONE);
         btnNext.setVisibility(View.GONE);

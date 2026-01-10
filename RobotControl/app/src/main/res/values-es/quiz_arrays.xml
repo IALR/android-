@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="quiz_questions">
+        <item>¿Cuál es la ley de Ohm?</item>
+        <item>¿Qué significa LED?</item>
+        <item>¿Qué sensor se usa para medir distancia?</item>
+    </string-array>
+
+    <string-array name="quiz_q1_options">
+        <item>V = I × R</item>
+        <item>P = V × I</item>
+        <item>R = V + I</item>
+        <item>I = V - R</item>
+    </string-array>
+
+    <string-array name="quiz_q2_options">
+        <item>Diodo emisor de luz</item>
+        <item>Dispositivo de baja energía</item>
+        <item>Pantalla eléctrica larga</item>
+        <item>Controlador electrónico lineal</item>
+    </string-array>
+
+    <string-array name="quiz_q3_options">
+        <item>Sensor de temperatura</item>
+        <item>Sensor ultrasónico</item>
+        <item>Sensor de presión</item>
+        <item>Sensor de humedad</item>
+    </string-array>
+</resources>

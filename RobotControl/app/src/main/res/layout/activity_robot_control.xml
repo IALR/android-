@@ -30,7 +30,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Robot Control"
+                    android:text="@string/robot_control_title"
                     android:textAppearance="@style/TextAppearance.Headline" />
 
                 <TextView
@@ -38,7 +38,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_tiny"
-                    android:text="Status: Disconnected"
+                    android:text="@string/status_disconnected_label"
                     android:textAppearance="@style/TextAppearance.Caption" />
 
                 <TextView
@@ -46,7 +46,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_tiny"
-                    android:text="Command: (none yet)"
+                    android:text="@string/command_none"
                     android:textAppearance="@style/TextAppearance.Caption" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -69,7 +69,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Connection"
+                    android:text="@string/wifi_connection"
                     android:textAppearance="@style/TextAppearance.Title"
                     android:textColor="@color/accent_primary"
                     android:layout_marginBottom="@dimen/margin_small" />
@@ -78,7 +78,7 @@
                     android:id="@+id/btnScanWiFi"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/button_height"
-                    android:text="Scan for robots"
+                    android:text="@string/wifi_scan_for_robots"
                     android:textAppearance="@style/TextAppearance.Button"
                     android:textAllCaps="false"
                     android:background="@color/accent_primary"
@@ -139,7 +139,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Motor Control"
+                    android:text="@string/motor_control"
                     android:textAppearance="@style/TextAppearance.Title"
                     android:textColor="@color/accent_primary"
                     android:layout_marginBottom="@dimen/margin_small" />
@@ -262,7 +262,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Servo Control"
+                    android:text="@string/servo_control"
                     android:textAppearance="@style/TextAppearance.Title"
                     android:textColor="@color/accent_primary"
                     android:layout_marginBottom="@dimen/margin_small" />

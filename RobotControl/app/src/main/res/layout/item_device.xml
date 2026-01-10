@@ -21,7 +21,7 @@
             android:layout_width="@dimen/icon_medium"
             android:layout_height="@dimen/icon_medium"
             android:src="@drawable/ic_bluetooth"
-            android:tint="@color/robot_blue_primary"
+            android:tint="@color/primary_light"
             android:contentDescription="@string/connection_type"
             android:layout_marginEnd="@dimen/margin_medium" />
 
