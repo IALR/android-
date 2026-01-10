@@ -159,7 +159,7 @@
             android:layout_width="@dimen/icon_xlarge"
             android:layout_height="@dimen/icon_xlarge"
             android:src="@drawable/ic_circuit_pattern"
-            android:alpha="0.3"
+            app:cardBackgroundColor="@color/card_background"
             android:contentDescription="@string/app_name" />
 
     </LinearLayout>

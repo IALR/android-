@@ -18,7 +18,6 @@
             android:layout_height="wrap_content"
             android:text="🤖 Mechatronics"
             android:textSize="24sp"
-            android:textStyle="bold"
             android:textColor="@color/text_primary"
             android:layout_marginBottom="16dp"/>
 
@@ -45,11 +44,10 @@
                     android:textSize="16sp"
                     android:textColor="@color/text_primary"
                     android:lineSpacingExtra="4dp"/>
-
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Topics -->
+        <!-- Topics Title -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -159,7 +157,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Communication -->
+        <!-- Wireless Communication -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

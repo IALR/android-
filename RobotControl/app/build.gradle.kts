@@ -55,6 +55,9 @@ dependencies {
     
     // Fragment support
     implementation("androidx.fragment:fragment:1.6.2")
+
+    // Preferences (App Settings)
+    implementation("androidx.preference:preference:1.2.1")
     
     // Firebase for authentication and database
     implementation(platform("com.google.firebase:firebase-bom:32.7.0"))

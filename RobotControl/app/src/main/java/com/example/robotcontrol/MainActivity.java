@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         
         // Navigate to Settings
         cardSettings.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+            Intent intent = new Intent(MainActivity.this, AppSettingsActivity.class);
             startActivity(intent);
         });
         
