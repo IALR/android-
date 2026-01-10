@@ -87,13 +87,27 @@
             android:exported="false"
             android:label="@string/robot_wifi_control_label"
             android:parentActivityName=".MainActivity" />
+
+        <!-- Education Home Activity -->
+        <activity
+            android:name=".EducationHomeActivity"
+            android:exported="false"
+            android:label="@string/education_hub_title"
+            android:parentActivityName=".MainActivity" />
         
         <!-- Education Activity -->
         <activity
             android:name=".EducationActivity"
             android:exported="false"
             android:label="@string/education_activity_label"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".EducationHomeActivity" />
+
+        <!-- Quiz Activity -->
+        <activity
+            android:name=".QuizActivity"
+            android:exported="false"
+            android:label="@string/education_tab_quiz"
+            android:parentActivityName=".EducationHomeActivity" />
         
         <!-- Auto Reconnect Service -->
         <service

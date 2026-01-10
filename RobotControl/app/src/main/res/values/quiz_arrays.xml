@@ -4,7 +4,42 @@
         <item>What is Ohm\'s Law?</item>
         <item>What does LED stand for?</item>
         <item>Which sensor is used to measure distance?</item>
+        <item>What is the unit of electrical resistance?</item>
+        <item>What does PWM stand for?</item>
+        <item>Which component is commonly used to limit current for an LED?</item>
+        <item>In a series circuit, the current is:</item>
+        <item>Servo position is mainly controlled by changing the:</item>
+        <item>On a breadboard, the long side rails are typically used for:</item>
+        <item>The HC-05 module is most commonly used for:</item>
     </string-array>
+
+    <!-- Maps each question to its 4-option array resource -->
+    <array name="quiz_options_arrays">
+        <item>@array/quiz_q1_options</item>
+        <item>@array/quiz_q2_options</item>
+        <item>@array/quiz_q3_options</item>
+        <item>@array/quiz_q4_options</item>
+        <item>@array/quiz_q5_options</item>
+        <item>@array/quiz_q6_options</item>
+        <item>@array/quiz_q7_options</item>
+        <item>@array/quiz_q8_options</item>
+        <item>@array/quiz_q9_options</item>
+        <item>@array/quiz_q10_options</item>
+    </array>
+
+    <!-- Index (0-3) of the correct option per question -->
+    <integer-array name="quiz_correct_answers">
+        <item>0</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>1</item>
+        <item>0</item>
+        <item>0</item>
+        <item>1</item>
+        <item>3</item>
+        <item>2</item>
+    </integer-array>
 
     <string-array name="quiz_q1_options">
         <item>V = I × R</item>
@@ -25,5 +60,54 @@
         <item>Ultrasonic Sensor</item>
         <item>Pressure Sensor</item>
         <item>Humidity Sensor</item>
+    </string-array>
+
+    <string-array name="quiz_q4_options">
+        <item>Ampere (A)</item>
+        <item>Volt (V)</item>
+        <item>Ohm (Ω)</item>
+        <item>Watt (W)</item>
+    </string-array>
+
+    <string-array name="quiz_q5_options">
+        <item>Pulse Wave Motor</item>
+        <item>Pulse Width Modulation</item>
+        <item>Power Watt Management</item>
+        <item>Parallel Wire Mode</item>
+    </string-array>
+
+    <string-array name="quiz_q6_options">
+        <item>Resistor</item>
+        <item>Capacitor</item>
+        <item>Inductor</item>
+        <item>Transformer</item>
+    </string-array>
+
+    <string-array name="quiz_q7_options">
+        <item>The same through all components</item>
+        <item>Different at each component</item>
+        <item>Always zero</item>
+        <item>Only flows through resistors</item>
+    </string-array>
+
+    <string-array name="quiz_q8_options">
+        <item>Voltage level only</item>
+        <item>Pulse width of the control signal</item>
+        <item>Wire color</item>
+        <item>Number of gears inside the servo</item>
+    </string-array>
+
+    <string-array name="quiz_q9_options">
+        <item>Holding the microcontroller</item>
+        <item>Measuring voltage</item>
+        <item>Storing code</item>
+        <item>Power (VCC) and GND distribution</item>
+    </string-array>
+
+    <string-array name="quiz_q10_options">
+        <item>WiFi access point creation</item>
+        <item>GPS positioning</item>
+        <item>Bluetooth serial (UART) communication</item>
+        <item>Measuring motor speed</item>
     </string-array>
 </resources>

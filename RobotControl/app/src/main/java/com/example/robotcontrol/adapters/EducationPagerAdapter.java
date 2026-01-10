@@ -7,9 +7,9 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.robotcontrol.R;
 import com.example.robotcontrol.fragments.CircuitsFragment;
+import com.example.robotcontrol.fragments.EducationTopicFragment;
 import com.example.robotcontrol.fragments.ElectricityFragment;
 import com.example.robotcontrol.fragments.MechatronicsFragment;
-import com.example.robotcontrol.fragments.QuizFragment;
 
 /**
  * Adapter for education content ViewPager2
@@ -17,7 +17,7 @@ import com.example.robotcontrol.fragments.QuizFragment;
  */
 public class EducationPagerAdapter extends FragmentStateAdapter {
     
-    private static final int NUM_PAGES = 4;
+    private static final int NUM_PAGES = 9;
 
     private final FragmentActivity activity;
     
@@ -37,7 +37,35 @@ public class EducationPagerAdapter extends FragmentStateAdapter {
             case 2:
                 return new MechatronicsFragment();
             case 3:
-                return new QuizFragment();
+                return EducationTopicFragment.newInstance(
+                        R.string.education_tab_arduino,
+                        R.string.education_arduino_content
+                );
+            case 4:
+                return EducationTopicFragment.newInstance(
+                        R.string.education_tab_bluetooth_wifi,
+                        R.string.education_bluetooth_wifi_content
+                );
+            case 5:
+                return EducationTopicFragment.newInstance(
+                        R.string.education_tab_motors_drivers,
+                        R.string.education_motors_drivers_content
+                );
+            case 6:
+                return EducationTopicFragment.newInstance(
+                        R.string.education_tab_sensors,
+                        R.string.education_sensors_content
+                );
+            case 7:
+                return EducationTopicFragment.newInstance(
+                        R.string.education_tab_power_safety,
+                        R.string.education_power_safety_content
+                );
+            case 8:
+                return EducationTopicFragment.newInstance(
+                        R.string.education_tab_robot_building,
+                        R.string.education_robot_building_content
+                );
             default:
                 return new ElectricityFragment();
         }
@@ -60,7 +88,17 @@ public class EducationPagerAdapter extends FragmentStateAdapter {
             case 2:
                 return activity.getString(R.string.education_tab_mechatronics);
             case 3:
-                return activity.getString(R.string.education_tab_quiz);
+                return activity.getString(R.string.education_tab_arduino);
+            case 4:
+                return activity.getString(R.string.education_tab_bluetooth_wifi);
+            case 5:
+                return activity.getString(R.string.education_tab_motors_drivers);
+            case 6:
+                return activity.getString(R.string.education_tab_sensors);
+            case 7:
+                return activity.getString(R.string.education_tab_power_safety);
+            case 8:
+                return activity.getString(R.string.education_tab_robot_building);
             default:
                 return "";
         }

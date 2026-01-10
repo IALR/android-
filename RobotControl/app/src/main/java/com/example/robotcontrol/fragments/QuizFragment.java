@@ -14,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.content.res.TypedArray;
+
 import com.example.robotcontrol.R;
 
 /**
@@ -37,8 +39,9 @@ public class QuizFragment extends Fragment {
     
     private String[] questions;
     private String[][] options;
-    
-    private int[] correctAnswers = {0, 0, 1}; // Index of correct answer
+
+    // Index (0-3) of correct option per question
+    private int[] correctAnswers;
     
     @Nullable
     @Override
@@ -96,17 +99,22 @@ public class QuizFragment extends Fragment {
     private void loadQuizData() {
         questions = getResources().getStringArray(R.array.quiz_questions);
 
-        int[] optionResIds = new int[]{
-                R.array.quiz_q1_options,
-                R.array.quiz_q2_options,
-                R.array.quiz_q3_options
-        };
-
-        options = new String[questions.length][4];
-        for (int i = 0; i < questions.length; i++) {
-            String[] row = getResources().getStringArray(optionResIds[i]);
-            options[i] = row;
+        TypedArray optionArrays = getResources().obtainTypedArray(R.array.quiz_options_arrays);
+        try {
+            options = new String[questions.length][4];
+            for (int i = 0; i < questions.length; i++) {
+                int resId = optionArrays.getResourceId(i, 0);
+                if (resId == 0) {
+                    options[i] = new String[0];
+                    continue;
+                }
+                options[i] = getResources().getStringArray(resId);
+            }
+        } finally {
+            optionArrays.recycle();
         }
+
+        correctAnswers = getResources().getIntArray(R.array.quiz_correct_answers);
     }
     
     private void renderQuestion(boolean clearSelection) {

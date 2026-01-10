@@ -114,6 +114,12 @@ public class EducationActivity extends AppCompatActivity {
         // Restore last visited tab
         int lastTab = getSharedPreferences("LearningProgress", MODE_PRIVATE)
                 .getInt("last_visited_tab", 0);
+        if (pagerAdapter != null) {
+            int maxIndex = Math.max(0, pagerAdapter.getItemCount() - 1);
+            lastTab = Math.max(0, Math.min(lastTab, maxIndex));
+        } else {
+            lastTab = 0;
+        }
         viewPager.setCurrentItem(lastTab, false);
     }
     

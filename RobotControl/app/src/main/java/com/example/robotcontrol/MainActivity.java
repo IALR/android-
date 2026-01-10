@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         
         // Navigate to Education Hub
         cardEducation.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, EducationActivity.class);
+            Intent intent = new Intent(MainActivity.this, EducationHomeActivity.class);
             startActivity(intent);
         });
         

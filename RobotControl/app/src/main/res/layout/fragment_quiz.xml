@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="📝 quiz title"
+            android:text="@string/education_tab_quiz"
             android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="@color/text_primary"
