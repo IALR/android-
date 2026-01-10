@@ -1,9 +1,13 @@
 package com.example.robotcontrol;
 
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.ClipData;
 import android.os.Bundle;
 import android.view.DragEvent;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -41,7 +45,9 @@ public class CircuitBuilderActivity extends AppCompatActivity {
 
     private TextView tvLedStatus;
     private TextView tvHint;
-    private View viewLedIndicator;
+    private ImageView viewLedIndicator;
+
+    private ObjectAnimator ledPulseAnimator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,6 +131,8 @@ public class CircuitBuilderActivity extends AppCompatActivity {
 
                 renderSlots();
                 updateLedState();
+
+                popSlot(slots[slotIndex]);
                 return true;
 
             default:
@@ -160,20 +168,64 @@ public class CircuitBuilderActivity extends AppCompatActivity {
             FrameLayout slot = slots[i];
             slot.removeAllViews();
 
-            TextView tv = new TextView(this);
-            tv.setLayoutParams(new FrameLayout.LayoutParams(
+            LinearLayout container = new LinearLayout(this);
+            container.setLayoutParams(new FrameLayout.LayoutParams(
                     FrameLayout.LayoutParams.MATCH_PARENT,
                     FrameLayout.LayoutParams.MATCH_PARENT
             ));
-            tv.setGravity(android.view.Gravity.CENTER);
-            tv.setTextColor(getColor(R.color.text_primary));
-            tv.setTextSize(14f);
-            tv.setTypeface(tv.getTypeface(), android.graphics.Typeface.BOLD);
+            container.setOrientation(LinearLayout.VERTICAL);
+            container.setGravity(android.view.Gravity.CENTER);
 
             SlotState state = slotStates[i];
+
+            ImageView icon = new ImageView(this);
+            LinearLayout.LayoutParams iconParams = new LinearLayout.LayoutParams(dp(22), dp(22));
+            icon.setLayoutParams(iconParams);
+            int iconRes = getPartIconRes(state);
+            if (iconRes != 0) {
+                icon.setImageResource(iconRes);
+                icon.setColorFilter(getColor(R.color.accent_primary));
+                icon.setAlpha(0.95f);
+                container.addView(icon);
+            }
+
+            TextView tv = new TextView(this);
+            tv.setLayoutParams(new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            ));
+            tv.setGravity(android.view.Gravity.CENTER);
+            tv.setTextColor(getColor(R.color.text_primary));
+            tv.setTextSize(13f);
+            tv.setTypeface(tv.getTypeface(), android.graphics.Typeface.BOLD);
             tv.setText(getSlotLabel(state));
-            slot.addView(tv);
+            if (iconRes != 0) {
+                ((LinearLayout.LayoutParams) tv.getLayoutParams()).topMargin = dp(6);
+            }
+            container.addView(tv);
+
+            slot.addView(container);
         }
+    }
+
+    private int getPartIconRes(@NonNull SlotState state) {
+        switch (state.part) {
+            case BATTERY:
+                return R.drawable.ic_part_battery;
+            case SWITCH:
+                return R.drawable.ic_part_switch;
+            case RESISTOR:
+                return R.drawable.ic_part_resistor;
+            case LED:
+                return R.drawable.ic_part_led;
+            case NONE:
+            default:
+                return 0;
+        }
+    }
+
+    private int dp(int dp) {
+        return Math.round(getResources().getDisplayMetrics().density * dp);
     }
 
     private String getSlotLabel(@NonNull SlotState state) {
@@ -201,9 +253,48 @@ public class CircuitBuilderActivity extends AppCompatActivity {
         tvLedStatus.setText(on ? getString(R.string.circuit_builder_led_on) : getString(R.string.circuit_builder_led_off));
         tvHint.setText(on ? getString(R.string.circuit_builder_hint_on) : getString(R.string.circuit_builder_hint));
 
-        // Indicator color (uses existing theme colors)
-        viewLedIndicator.setBackgroundResource(R.drawable.bg_robotics_cell);
-        viewLedIndicator.setAlpha(on ? 1.0f : 0.35f);
+        viewLedIndicator.setColorFilter(getColor(on ? R.color.accent_primary : R.color.text_secondary));
+        viewLedIndicator.setAlpha(on ? 1.0f : 0.55f);
+
+        if (on) {
+            startLedPulse();
+        } else {
+            stopLedPulse();
+        }
+    }
+
+    private void startLedPulse() {
+        if (ledPulseAnimator != null && ledPulseAnimator.isRunning()) return;
+        ledPulseAnimator = ObjectAnimator.ofFloat(viewLedIndicator, View.ALPHA, 0.65f, 1.0f);
+        ledPulseAnimator.setDuration(500);
+        ledPulseAnimator.setRepeatMode(ValueAnimator.REVERSE);
+        ledPulseAnimator.setRepeatCount(ValueAnimator.INFINITE);
+        ledPulseAnimator.start();
+    }
+
+    private void stopLedPulse() {
+        if (ledPulseAnimator != null) {
+            ledPulseAnimator.cancel();
+            ledPulseAnimator = null;
+        }
+        if (viewLedIndicator != null) {
+            viewLedIndicator.setAlpha(0.55f);
+        }
+    }
+
+    private void popSlot(@NonNull View slot) {
+        slot.animate()
+                .scaleX(1.03f)
+                .scaleY(1.03f)
+                .setDuration(110)
+                .withEndAction(() -> slot.animate().scaleX(1f).scaleY(1f).setDuration(110).start())
+                .start();
+    }
+
+    @Override
+    protected void onDestroy() {
+        stopLedPulse();
+        super.onDestroy();
     }
 
     private boolean isCircuitValidAndOn() {

@@ -17,7 +17,7 @@
             android:id="@+id/tvWelcome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/dashboard_welcome_default"
+            android:text="Welcome back!👋"
             android:textSize="28sp"
             android:textStyle="bold"
             android:textColor="@color/text_primary"

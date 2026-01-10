@@ -120,11 +120,13 @@
                 android:padding="16dp"
                 android:gravity="center_vertical">
 
-                <View
+                <ImageView
                     android:id="@+id/viewLedIndicator"
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
-                    android:background="@drawable/bg_robotics_cell" />
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_part_led"
+                    android:tint="@color/text_secondary"
+                    android:alpha="0.55" />
 
                 <TextView
                     android:id="@+id/tvLedStatus"
@@ -176,13 +178,29 @@
                 app:cardElevation="1dp"
                 app:cardBackgroundColor="@color/card_background">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="@string/circuit_builder_part_battery"
-                    android:textStyle="bold"
-                    android:textColor="@color/text_primary" />
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_part_battery"
+                        android:tint="@color/accent_primary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/circuit_builder_part_battery"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
+                        android:textSize="12sp"
+                        android:layout_marginTop="6dp" />
+
+                </LinearLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -195,13 +213,29 @@
                 app:cardElevation="1dp"
                 app:cardBackgroundColor="@color/card_background">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="@string/circuit_builder_part_switch"
-                    android:textStyle="bold"
-                    android:textColor="@color/text_primary" />
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_part_switch"
+                        android:tint="@color/accent_primary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/circuit_builder_part_switch"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
+                        android:textSize="12sp"
+                        android:layout_marginTop="6dp" />
+
+                </LinearLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -214,13 +248,29 @@
                 app:cardElevation="1dp"
                 app:cardBackgroundColor="@color/card_background">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="@string/circuit_builder_part_resistor"
-                    android:textStyle="bold"
-                    android:textColor="@color/text_primary" />
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_part_resistor"
+                        android:tint="@color/accent_primary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/circuit_builder_part_resistor"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
+                        android:textSize="12sp"
+                        android:layout_marginTop="6dp" />
+
+                </LinearLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -232,13 +282,29 @@
                 app:cardElevation="1dp"
                 app:cardBackgroundColor="@color/card_background">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="@string/circuit_builder_part_led"
-                    android:textStyle="bold"
-                    android:textColor="@color/text_primary" />
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_part_led"
+                        android:tint="@color/accent_primary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/circuit_builder_part_led"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
+                        android:textSize="12sp"
+                        android:layout_marginTop="6dp" />
+
+                </LinearLayout>
             </androidx.cardview.widget.CardView>
 
         </LinearLayout>
