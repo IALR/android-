@@ -8,5 +8,6 @@ public class RobotControlApp extends Application {
         super.onCreate();
         AppSettings.applyLanguage(this);
         AppSettings.applyTheme(this);
+        AppSettings.applyColorTheme(this);
     }
 }

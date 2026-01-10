@@ -57,6 +57,7 @@ public class ControlActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AppSettings.applyColorTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_control);
 

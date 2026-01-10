@@ -43,5 +43,20 @@ public class AppSettingsFragment extends PreferenceFragmentCompat {
                 }
             });
         }
+        
+        ListPreference colorThemePreference = findPreference(AppSettings.KEY_COLOR_THEME);
+        if (colorThemePreference != null) {
+            colorThemePreference.setSummaryProvider(ListPreference.SimpleSummaryProvider.getInstance());
+            colorThemePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    // Apply color theme immediately and recreate to reflect changes
+                    if (newValue instanceof String) {
+                        requireActivity().recreate();
+                    }
+                    return true;
+                }
+            });
+        }
     }
 }

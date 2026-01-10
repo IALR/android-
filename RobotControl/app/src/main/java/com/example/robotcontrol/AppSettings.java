@@ -12,13 +12,18 @@ public final class AppSettings {
     }
 
     public static final String KEY_THEME_MODE = "pref_theme_mode";
-
+    public static final String KEY_COLOR_THEME = "pref_color_theme";
     public static final String KEY_LANGUAGE = "pref_language";
 
     // Values stored in prefs
     public static final String THEME_SYSTEM = "system";
     public static final String THEME_LIGHT = "light";
     public static final String THEME_DARK = "dark";
+    
+    // Color theme values
+    public static final String COLOR_THEME_DEFAULT = "default";
+    public static final String COLOR_THEME_PINK = "pink";
+    public static final String COLOR_THEME_BROWN = "brown";
 
     // Values stored in prefs (BCP-47 language tags)
     public static final String LANGUAGE_EN = "en";
@@ -39,6 +44,19 @@ public final class AppSettings {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+        }
+    }
+    
+    public static void applyColorTheme(Context context) {
+        String colorTheme = PreferenceManager.getDefaultSharedPreferences(context)
+                .getString(KEY_COLOR_THEME, COLOR_THEME_DEFAULT);
+        
+        if (COLOR_THEME_PINK.equals(colorTheme)) {
+            context.setTheme(R.style.Theme_RobotControl_Pink);
+        } else if (COLOR_THEME_BROWN.equals(colorTheme)) {
+            context.setTheme(R.style.Theme_RobotControl_Brown);
+        } else {
+            context.setTheme(R.style.Theme_RobotControl);
         }
     }
 

@@ -43,6 +43,7 @@ public class RobotListActivity extends AppCompatActivity implements RobotAdapter
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AppSettings.applyColorTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_robot_list);
 

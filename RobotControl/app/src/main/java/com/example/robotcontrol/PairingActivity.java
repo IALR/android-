@@ -70,6 +70,7 @@ public class PairingActivity extends AppCompatActivity implements WifiNetworkAda
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AppSettings.applyColorTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pairing);
 

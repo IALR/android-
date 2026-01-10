@@ -3,4 +3,20 @@
     <style name="Base.Theme.RobotControl" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
     </style>
+    
+    <!-- Pink Color Theme - Dark Variant -->
+    <style name="Theme.RobotControl.Pink" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/pink_primary</item>
+        <item name="colorPrimaryDark">@color/pink_primary_dark</item>
+        <item name="colorAccent">@color/pink_accent</item>
+        <item name="colorSecondary">@color/pink_secondary</item>
+    </style>
+    
+    <!-- Brown Color Theme - Dark Variant -->
+    <style name="Theme.RobotControl.Brown" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/brown_primary</item>
+        <item name="colorPrimaryDark">@color/brown_primary_dark</item>
+        <item name="colorAccent">@color/brown_accent</item>
+        <item name="colorSecondary">@color/brown_secondary</item>
+    </style>
 </resources>

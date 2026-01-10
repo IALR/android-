@@ -33,9 +33,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RobotControl">
         
-        <!-- Login Activity as launcher -->
+        <!-- Splash Activity as launcher -->
         <activity
-            android:name=".LoginActivity"
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -43,9 +43,9 @@
             </intent-filter>
         </activity>
         
-        <!-- Robot List Activity -->
+        <!-- Login Activity -->
         <activity
-            android:name=".RobotListActivity"
+            android:name=".LoginActivity"
             android:exported="false" />
         
         <!-- Pairing Activity -->

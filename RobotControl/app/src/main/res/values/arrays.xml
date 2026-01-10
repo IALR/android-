@@ -22,4 +22,16 @@
         <item>light</item>
         <item>dark</item>
     </string-array>
+    
+    <string-array name="pref_color_theme_entries">
+        <item>@string/pref_color_theme_default</item>
+        <item>@string/pref_color_theme_pink</item>
+        <item>@string/pref_color_theme_brown</item>
+    </string-array>
+
+    <string-array name="pref_color_theme_values">
+        <item>default</item>
+        <item>pink</item>
+        <item>brown</item>
+    </string-array>
 </resources>

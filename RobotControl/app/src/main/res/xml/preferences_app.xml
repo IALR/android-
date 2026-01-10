@@ -20,6 +20,14 @@
             android:entries="@array/pref_theme_entries"
             android:entryValues="@array/pref_theme_values" />
 
+        <ListPreference
+            android:key="pref_color_theme"
+            android:title="@string/pref_color_theme_title"
+            android:summary="@string/pref_color_theme_summary"
+            android:defaultValue="default"
+            android:entries="@array/pref_color_theme_entries"
+            android:entryValues="@array/pref_color_theme_values" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>

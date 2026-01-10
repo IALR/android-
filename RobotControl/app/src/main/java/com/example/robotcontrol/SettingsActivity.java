@@ -46,6 +46,7 @@ public class SettingsActivity extends AppCompatActivity implements PermissionAda
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AppSettings.applyColorTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 

@@ -47,10 +47,18 @@ Servo servos[SERVO_COUNT];
 
 // Neutral / stop pose
 static int posNeutral[SERVO_COUNT] = {90, 90, 90, 90, 90, 90, 90, 90};
-// Low pose
-static int posLow[SERVO_COUNT]     = {70, 70, 110, 110, 70, 70, 110, 110};
+// Low pose (darker/lower stance)
+static int posLow[SERVO_COUNT]     = {50, 50, 130, 130, 50, 50, 130, 130};
 // Walk pose (standing)
 static int posWalk[SERVO_COUNT]    = {90, 80, 90, 100, 90, 80, 90, 100};
+// Forward leg lift (left)
+static int posForwardLeft[SERVO_COUNT] = {110, 60, 70, 100, 90, 80, 90, 100};
+// Forward leg lift (right)
+static int posForwardRight[SERVO_COUNT] = {90, 80, 90, 120, 70, 80, 90, 100};
+// Backward leg lift (left)
+static int posBackLeft[SERVO_COUNT] = {70, 100, 90, 100, 90, 80, 90, 100};
+// Backward leg lift (right)
+static int posBackRight[SERVO_COUNT] = {90, 80, 90, 80, 110, 80, 90, 100};
 
 static const int STEP_DELAY_MS = 8;   // smooth motion
 static const int STEP_SIZE = 1;       // degrees per step
@@ -102,37 +110,39 @@ void poseWalk() {
   writePoseSmooth(posWalk);
 }
 
-// Very simple demo "forward" gait placeholder.
-// Replace with your real 8-servo gait if you have one.
+// Enhanced forward gait with multiple steps for smooth animation
 void doForwardStep() {
-  // Example: tiny oscillation on a few servos
-  int tmp[SERVO_COUNT];
-  for (uint8_t i = 0; i < SERVO_COUNT; i++) tmp[i] = posWalk[i];
-
-  tmp[0] = posWalk[0] + 10;
-  tmp[3] = posWalk[3] - 10;
-  writePoseSmooth(tmp);
-
-  tmp[0] = posWalk[0] - 10;
-  tmp[3] = posWalk[3] + 10;
-  writePoseSmooth(tmp);
-
-  poseWalk();
+  // Perform 3 animated forward steps for continuous walking effect
+  for (int step = 0; step < 3; step++) {
+    // Left leg forward
+    writePoseSmooth(posForwardLeft);
+    delay(100);
+    writePoseSmooth(posWalk);
+    delay(100);
+    
+    // Right leg forward
+    writePoseSmooth(posForwardRight);
+    delay(100);
+    writePoseSmooth(posWalk);
+    delay(100);
+  }
 }
 
 void doBackwardStep() {
-  int tmp[SERVO_COUNT];
-  for (uint8_t i = 0; i < SERVO_COUNT; i++) tmp[i] = posWalk[i];
-
-  tmp[1] = posWalk[1] + 10;
-  tmp[2] = posWalk[2] - 10;
-  writePoseSmooth(tmp);
-
-  tmp[1] = posWalk[1] - 10;
-  tmp[2] = posWalk[2] + 10;
-  writePoseSmooth(tmp);
-
-  poseWalk();
+  // Perform 3 animated backward steps for continuous walking effect
+  for (int step = 0; step < 3; step++) {
+    // Left leg backward
+    writePoseSmooth(posBackLeft);
+    delay(100);
+    writePoseSmooth(posWalk);
+    delay(100);
+    
+    // Right leg backward
+    writePoseSmooth(posBackRight);
+    delay(100);
+    writePoseSmooth(posWalk);
+    delay(100);
+  }
 }
 
 void testSweep() {
