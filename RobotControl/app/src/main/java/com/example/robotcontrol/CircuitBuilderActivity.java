@@ -20,6 +20,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.example.robotcontrol.utils.EducationProgressStore;
+import com.example.robotcontrol.logic.CircuitValidation;
 
 /**
  * Very simple Circuit Builder mini-game.
@@ -310,20 +311,33 @@ public class CircuitBuilderActivity extends AppCompatActivity {
     }
 
     private boolean isCircuitValidAndOn() {
-        // Require exact order: Battery -> Switch -> Resistor -> LED
-        if (slotStates[0].part != Part.BATTERY) return false;
-        if (slotStates[1].part != Part.SWITCH) return false;
-        if (slotStates[2].part != Part.RESISTOR) return false;
-        if (slotStates[3].part != Part.LED) return false;
+        CircuitValidation.Part[] parts = new CircuitValidation.Part[4];
+        boolean[] switchClosedBySlot = new boolean[4];
+        boolean[] ledForwardBySlot = new boolean[4];
 
-        // Must not have duplicates elsewhere (already implied by exact order)
-        // Switch must be closed
-        if (!slotStates[1].switchClosed) return false;
+        for (int i = 0; i < 4; i++) {
+            SlotState s = slotStates[i];
+            parts[i] = toValidationPart(s.part);
+            switchClosedBySlot[i] = s.switchClosed;
+            ledForwardBySlot[i] = s.ledForward;
+        }
 
-        // LED polarity must be correct (forward)
-        if (!slotStates[3].ledForward) return false;
+        return CircuitValidation.isValidAndOn(parts, switchClosedBySlot, ledForwardBySlot);
+    }
 
-        // Resistor present means LED is protected
-        return true;
+    private CircuitValidation.Part toValidationPart(@NonNull Part part) {
+        switch (part) {
+            case BATTERY:
+                return CircuitValidation.Part.BATTERY;
+            case SWITCH:
+                return CircuitValidation.Part.SWITCH;
+            case RESISTOR:
+                return CircuitValidation.Part.RESISTOR;
+            case LED:
+                return CircuitValidation.Part.LED;
+            case NONE:
+            default:
+                return CircuitValidation.Part.NONE;
+        }
     }
 }

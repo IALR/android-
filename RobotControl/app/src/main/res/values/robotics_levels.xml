@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Level configuration for Robot Path Planner -->
+    <integer name="robotics_level_grid_size">4</integer>
+    <integer-array name="robotics_level_start">
+        <item>0</item>
+        <item>0</item>
+    </integer-array>
+    <integer-array name="robotics_level_goal">
+        <item>3</item>
+        <item>3</item>
+    </integer-array>
+
+    <!-- Flattened indices: row*grid + col. Easy mode has no obstacles. -->
+    <integer-array name="robotics_level_obstacles" />
+
+</resources>

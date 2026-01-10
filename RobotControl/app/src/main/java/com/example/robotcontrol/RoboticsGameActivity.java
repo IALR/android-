@@ -26,7 +26,7 @@ import java.util.Set;
  */
 public class RoboticsGameActivity extends AppCompatActivity {
 
-    private static final int GRID_SIZE = 4;
+    private int gridSize = 4;
     private static final int MAX_PROGRAM_STEPS = 18;
     private static final int STEP_DELAY_MS = 250;
 
@@ -45,8 +45,8 @@ public class RoboticsGameActivity extends AppCompatActivity {
 
     private int startRow = 0;
     private int startCol = 0;
-    private int goalRow = GRID_SIZE - 1;
-    private int goalCol = GRID_SIZE - 1;
+    private int goalRow = 3;
+    private int goalCol = 3;
 
     private int robotRow = startRow;
     private int robotCol = startCol;
@@ -85,7 +85,8 @@ public class RoboticsGameActivity extends AppCompatActivity {
         btnRun = findViewById(R.id.btnRun);
         btnReset = findViewById(R.id.btnReset);
 
-        rvGrid.setLayoutManager(new GridLayoutManager(this, GRID_SIZE));
+        loadLevelFromResources();
+        rvGrid.setLayoutManager(new GridLayoutManager(this, gridSize));
         initObstacles();
         initCells();
 
@@ -114,8 +115,7 @@ public class RoboticsGameActivity extends AppCompatActivity {
     }
 
     private void initObstacles() {
-        // Easy mode: no obstacles.
-        obstacles.clear();
+        // Obstacles are loaded by loadLevelFromResources().
     }
 
     private void addObstacle(int row, int col) {
@@ -124,7 +124,7 @@ public class RoboticsGameActivity extends AppCompatActivity {
 
     private void initCells() {
         cells.clear();
-        for (int i = 0; i < GRID_SIZE * GRID_SIZE; i++) {
+        for (int i = 0; i < gridSize * gridSize; i++) {
             cells.add(RoboticsGridAdapter.CELL_EMPTY);
         }
         robotRow = startRow;
@@ -134,7 +134,7 @@ public class RoboticsGameActivity extends AppCompatActivity {
     }
 
     private void renderGrid() {
-        for (int i = 0; i < GRID_SIZE * GRID_SIZE; i++) {
+        for (int i = 0; i < gridSize * gridSize; i++) {
             cells.set(i, RoboticsGridAdapter.CELL_EMPTY);
         }
 
@@ -298,7 +298,7 @@ public class RoboticsGameActivity extends AppCompatActivity {
                 break;
         }
 
-        if (nextRow < 0 || nextRow >= GRID_SIZE || nextCol < 0 || nextCol >= GRID_SIZE) {
+        if (nextRow < 0 || nextRow >= gridSize || nextCol < 0 || nextCol >= gridSize) {
             return false;
         }
 
@@ -341,6 +341,41 @@ public class RoboticsGameActivity extends AppCompatActivity {
     }
 
     private int index(int row, int col) {
-        return row * GRID_SIZE + col;
+        return row * gridSize + col;
+    }
+
+    private void loadLevelFromResources() {
+        // Defaults are already set; we just override if resources exist.
+        try {
+            gridSize = getResources().getInteger(R.integer.robotics_level_grid_size);
+        } catch (Exception ignored) {
+        }
+
+        try {
+            int[] start = getResources().getIntArray(R.array.robotics_level_start);
+            if (start.length >= 2) {
+                startRow = start[0];
+                startCol = start[1];
+            }
+        } catch (Exception ignored) {
+        }
+
+        try {
+            int[] goal = getResources().getIntArray(R.array.robotics_level_goal);
+            if (goal.length >= 2) {
+                goalRow = goal[0];
+                goalCol = goal[1];
+            }
+        } catch (Exception ignored) {
+        }
+
+        obstacles.clear();
+        try {
+            int[] obs = getResources().getIntArray(R.array.robotics_level_obstacles);
+            for (int idx : obs) {
+                obstacles.add(idx);
+            }
+        } catch (Exception ignored) {
+        }
     }
 }
