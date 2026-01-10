@@ -136,7 +136,11 @@ public class SettingsActivity extends AppCompatActivity implements PermissionAda
     }
 
     private void loadRobotDetails() {
-        robot = dbHelper.getRobot(robotId);
+        try {
+            robot = dbHelper.getRobot(robotId);
+        } catch (Exception e) {
+            robot = null;
+        }
         if (robot == null) {
             Toast.makeText(this, "Robot not found", Toast.LENGTH_SHORT).show();
             finish();
@@ -174,8 +178,14 @@ public class SettingsActivity extends AppCompatActivity implements PermissionAda
 
     private void loadPermissions() {
         permissionList.clear();
-        List<RobotPermission> permissions = dbHelper.getPermissionsForRobot(robotId);
-        permissionList.addAll(permissions);
+        try {
+            List<RobotPermission> permissions = dbHelper.getPermissionsForRobot(robotId);
+            if (permissions != null) {
+                permissionList.addAll(permissions);
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, "Failed to load permissions", Toast.LENGTH_SHORT).show();
+        }
         permissionAdapter.notifyDataSetChanged();
     }
 

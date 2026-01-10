@@ -91,6 +91,16 @@
     <string name="quiz_complete_format" translatable="false">Quiz Complete!\n\nYour Score: %1$d/%2$d</string>
     <string name="quiz_data_invalid" translatable="false">Quiz data is invalid. Please update the questions/options.</string>
 
+    <string name="quiz_best_format" translatable="false">Best score: %1$d/%2$d</string>
+    <string name="quiz_result_tip">Tip: Review the answers you missed, then retry to improve your score.</string>
+    <string name="quiz_retry">Retry quiz</string>
+    <string name="quiz_review_answers">Review answers</string>
+    <string name="quiz_review_title">Review Answers</string>
+    <string name="quiz_review_subtitle">Compare your selected answer with the correct answer for each question.</string>
+    <string name="quiz_your_answer_format" translatable="false">Your answer: %1$s</string>
+    <string name="quiz_correct_answer_format" translatable="false">Correct answer: %1$s</string>
+    <string name="quiz_not_answered">(not answered)</string>
+
     <!-- Common UI -->
     <string name="command_none">Command: (none yet)</string>
     <string name="motor_control">Motor Control</string>
@@ -122,6 +132,10 @@
     <string name="education_tab_sensors">Sensors</string>
     <string name="education_tab_power_safety">Power &amp; Safety</string>
     <string name="education_tab_robot_building">Robot Building</string>
+
+    <string name="education_progress_completed">Completed</string>
+    <string name="education_progress_not_completed">Not completed yet</string>
+    <string name="education_progress_no_score">No score yet</string>
 
     <!-- Robotics mini-game -->
     <string name="robotics_game_title">Robot Path Planner</string>

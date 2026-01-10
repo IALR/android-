@@ -65,6 +65,12 @@ public class ControlActivity extends AppCompatActivity {
         robotId = getIntent().getStringExtra("robot_id");
         robotName = getIntent().getStringExtra("robot_name");
 
+        if (robotId == null || robotId.trim().isEmpty()) {
+            Toast.makeText(this, "Missing robot id", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+
         dbHelper = new DatabaseHelper(this);
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
@@ -100,7 +106,11 @@ public class ControlActivity extends AppCompatActivity {
         robotNameText.setText(robotName);
 
         // Load robot details
-        robot = dbHelper.getRobot(robotId);
+        try {
+            robot = dbHelper.getRobot(robotId);
+        } catch (Exception e) {
+            robot = null;
+        }
 
         // Setup controls
         setupControls();
@@ -237,6 +247,18 @@ public class ControlActivity extends AppCompatActivity {
     private void connect() {
         if (robot == null) {
             Toast.makeText(this, "Robot not found", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (bluetoothAdapter == null) {
+            Toast.makeText(this, "Bluetooth not supported", Toast.LENGTH_SHORT).show();
+            updateConnectionStatus(false);
+            return;
+        }
+
+        if (robot.getMacAddress() == null || robot.getMacAddress().trim().isEmpty()) {
+            Toast.makeText(this, "Robot Bluetooth address missing", Toast.LENGTH_SHORT).show();
+            updateConnectionStatus(false);
             return;
         }
 

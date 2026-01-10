@@ -14,9 +14,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.content.res.TypedArray;
 
+import java.util.Arrays;
+
 import com.example.robotcontrol.R;
+import com.example.robotcontrol.QuizResultActivity;
 
 /**
  * Fragment for Quiz functionality
@@ -36,12 +40,16 @@ public class QuizFragment extends Fragment {
     private static final String KEY_SCORE = "quiz_score";
     private static final String KEY_ANSWERED = "quiz_answered";
     private static final String KEY_CHECKED_ID = "quiz_checked_id";
+    private static final String KEY_USER_ANSWERS = "quiz_user_answers";
     
     private String[] questions;
     private String[][] options;
 
     // Index (0-3) of correct option per question
     private int[] correctAnswers;
+
+    // per-question selected option index (0-3). -1 means not answered.
+    private int[] userAnswers;
     
     @Nullable
     @Override
@@ -63,6 +71,7 @@ public class QuizFragment extends Fragment {
             score = savedInstanceState.getInt(KEY_SCORE, 0);
             isQuestionAnswered = savedInstanceState.getBoolean(KEY_ANSWERED, false);
             int checkedId = savedInstanceState.getInt(KEY_CHECKED_ID, -1);
+            userAnswers = savedInstanceState.getIntArray(KEY_USER_ANSWERS);
 
             renderQuestion(false);
             if (checkedId != -1) {
@@ -115,6 +124,13 @@ public class QuizFragment extends Fragment {
         }
 
         correctAnswers = getResources().getIntArray(R.array.quiz_correct_answers);
+
+        if (questions != null) {
+            if (userAnswers == null || userAnswers.length != questions.length) {
+                userAnswers = new int[questions.length];
+                Arrays.fill(userAnswers, -1);
+            }
+        }
     }
     
     private void renderQuestion(boolean clearSelection) {
@@ -150,6 +166,10 @@ public class QuizFragment extends Fragment {
         else if (selectedId == rbOption2.getId()) selectedIndex = 1;
         else if (selectedId == rbOption3.getId()) selectedIndex = 2;
         else if (selectedId == rbOption4.getId()) selectedIndex = 3;
+
+        if (userAnswers != null && currentQuestion >= 0 && currentQuestion < userAnswers.length) {
+            userAnswers[currentQuestion] = selectedIndex;
+        }
         
         if (selectedIndex == correctAnswers[currentQuestion]) {
             score++;
@@ -169,12 +189,14 @@ public class QuizFragment extends Fragment {
     }
     
     private void showResults() {
-        tvQuestion.setText(getString(R.string.quiz_complete_format, score, questions.length));
-        rgOptions.setVisibility(View.GONE);
-        btnSubmit.setVisibility(View.GONE);
-        btnNext.setVisibility(View.GONE);
-        
-        // Save score to database
+        if (!isAdded() || getActivity() == null) return;
+
+        Intent intent = new Intent(getActivity(), QuizResultActivity.class);
+        intent.putExtra(QuizResultActivity.EXTRA_SCORE, score);
+        intent.putExtra(QuizResultActivity.EXTRA_TOTAL, questions != null ? questions.length : 0);
+        intent.putExtra(QuizResultActivity.EXTRA_USER_ANSWERS, userAnswers);
+        startActivity(intent);
+        getActivity().finish();
     }
 
     private void applyAnsweredState() {
@@ -224,5 +246,6 @@ public class QuizFragment extends Fragment {
         outState.putInt(KEY_SCORE, score);
         outState.putBoolean(KEY_ANSWERED, isQuestionAnswered);
         outState.putInt(KEY_CHECKED_ID, rgOptions != null ? rgOptions.getCheckedRadioButtonId() : -1);
+        outState.putIntArray(KEY_USER_ANSWERS, userAnswers);
     }
 }

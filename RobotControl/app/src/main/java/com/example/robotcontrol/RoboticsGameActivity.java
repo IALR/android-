@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.robotcontrol.adapters.RoboticsGridAdapter;
+import com.example.robotcontrol.utils.EducationProgressStore;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -260,6 +261,17 @@ public class RoboticsGameActivity extends AppCompatActivity {
     private void finishSuccess() {
         isRunning = false;
         setControlsEnabled(true);
+
+        EducationProgressStore.markRoboticsGameCompleted(this);
+
+        if (rvGrid != null) {
+            rvGrid.animate()
+                    .scaleX(1.03f)
+                    .scaleY(1.03f)
+                    .setDuration(140)
+                    .withEndAction(() -> rvGrid.animate().scaleX(1f).scaleY(1f).setDuration(140).start())
+                    .start();
+        }
         Toast.makeText(this, getString(R.string.robotics_game_success), Toast.LENGTH_LONG).show();
     }
 

@@ -119,10 +119,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadRobotPreview() {
         robotPreviewList.clear();
-        List<Robot> allRobots = dbHelper.getAllRobots();
-        int count = Math.min(allRobots.size(), 3);
-        for (int i = 0; i < count; i++) {
-            robotPreviewList.add(allRobots.get(i));
+        try {
+            List<Robot> allRobots = dbHelper.getAllRobots();
+            if (allRobots != null) {
+                int count = Math.min(allRobots.size(), 3);
+                for (int i = 0; i < count; i++) {
+                    robotPreviewList.add(allRobots.get(i));
+                }
+            }
+        } catch (Exception e) {
+            // keep UI stable
         }
 
         boolean hasRobots = !robotPreviewList.isEmpty();

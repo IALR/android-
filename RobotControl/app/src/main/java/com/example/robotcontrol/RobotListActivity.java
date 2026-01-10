@@ -64,6 +64,7 @@ public class RobotListActivity extends AppCompatActivity implements RobotAdapter
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(R.string.my_robots);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
         robotRecyclerView = findViewById(R.id.robotRecyclerView);
@@ -96,11 +97,23 @@ public class RobotListActivity extends AppCompatActivity implements RobotAdapter
         progressBar.setVisibility(View.VISIBLE);
         robotList.clear();
 
-        // Load from local database
-        List<Robot> localRobots = dbHelper.getAllRobots();
-        robotList.addAll(localRobots);
+        try {
+            // Load from local database
+            List<Robot> localRobots = dbHelper.getAllRobots();
+            if (localRobots != null) {
+                robotList.addAll(localRobots);
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, "Failed to load robots", Toast.LENGTH_SHORT).show();
+        }
 
         updateUI();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 
     private void updateUI() {

@@ -19,6 +19,8 @@ import androidx.cardview.widget.CardView;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.example.robotcontrol.utils.EducationProgressStore;
+
 /**
  * Very simple Circuit Builder mini-game.
  * Drag Battery / Switch / Resistor / LED into 4 series slots.
@@ -48,6 +50,8 @@ public class CircuitBuilderActivity extends AppCompatActivity {
     private ImageView viewLedIndicator;
 
     private ObjectAnimator ledPulseAnimator;
+
+    private boolean lastLedOn = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -261,6 +265,14 @@ public class CircuitBuilderActivity extends AppCompatActivity {
         } else {
             stopLedPulse();
         }
+
+        if (on && !lastLedOn) {
+            EducationProgressStore.markCircuitBuilderCompleted(this);
+            if (viewLedIndicator != null) {
+                popSlot(viewLedIndicator);
+            }
+        }
+        lastLedOn = on;
     }
 
     private void startLedPulse() {

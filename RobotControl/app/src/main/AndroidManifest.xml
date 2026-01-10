@@ -51,17 +51,20 @@
         <!-- Pairing Activity -->
         <activity
             android:name=".PairingActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".RobotListActivity" />
         
         <!-- Control Activity -->
         <activity
             android:name=".ControlActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".RobotListActivity" />
         
         <!-- Settings Activity -->
         <activity
             android:name=".SettingsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".RobotListActivity" />
 
         <!-- App Settings Activity -->
         <activity
@@ -79,7 +82,8 @@
         <activity
             android:name=".RobotListActivity"
             android:exported="false"
-            android:label="@string/my_robots" />
+            android:label="@string/my_robots"
+            android:parentActivityName=".MainActivity" />
         
         <!-- Robot Control Activity -->
         <activity
@@ -108,6 +112,20 @@
             android:exported="false"
             android:label="@string/education_tab_quiz"
             android:parentActivityName=".EducationHomeActivity" />
+
+        <!-- Quiz Result Activity -->
+        <activity
+            android:name=".QuizResultActivity"
+            android:exported="false"
+            android:label="@string/education_tab_quiz"
+            android:parentActivityName=".EducationHomeActivity" />
+
+        <!-- Quiz Review Activity -->
+        <activity
+            android:name=".QuizReviewActivity"
+            android:exported="false"
+            android:label="@string/quiz_review_title"
+            android:parentActivityName=".QuizResultActivity" />
 
         <!-- Robotics Game Activity -->
         <activity

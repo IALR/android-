@@ -49,6 +49,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="2dp"
                 app:cardBackgroundColor="@color/card_background">
@@ -105,6 +108,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="2dp"
                 app:cardBackgroundColor="@color/card_background">
@@ -144,6 +150,15 @@
                             android:text="@string/robotics_game_card_desc"
                             android:textSize="14sp"
                             android:textColor="@color/text_secondary" />
+
+                        <TextView
+                            android:id="@+id/tvRoboticsProgress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textSize="12sp"
+                            android:textColor="@color/text_secondary"
+                            android:layout_marginTop="2dp" />
                     </LinearLayout>
 
                     <ImageView
@@ -161,6 +176,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="2dp"
                 app:cardBackgroundColor="@color/card_background">
@@ -200,6 +218,15 @@
                             android:text="@string/circuit_builder_card_desc"
                             android:textSize="14sp"
                             android:textColor="@color/text_secondary" />
+
+                        <TextView
+                            android:id="@+id/tvCircuitProgress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textSize="12sp"
+                            android:textColor="@color/text_secondary"
+                            android:layout_marginTop="2dp" />
                     </LinearLayout>
 
                     <ImageView
@@ -216,6 +243,9 @@
                 android:id="@+id/cardQuiz"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="2dp"
                 app:cardBackgroundColor="@color/card_background">
@@ -255,6 +285,15 @@
                             android:text="@string/quiz_select_answer"
                             android:textSize="14sp"
                             android:textColor="@color/text_secondary" />
+
+                        <TextView
+                            android:id="@+id/tvQuizProgress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textSize="12sp"
+                            android:textColor="@color/text_secondary"
+                            android:layout_marginTop="2dp" />
                     </LinearLayout>
 
                     <ImageView
