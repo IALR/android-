@@ -25,7 +25,7 @@ import java.util.Set;
  */
 public class RoboticsGameActivity extends AppCompatActivity {
 
-    private static final int GRID_SIZE = 6;
+    private static final int GRID_SIZE = 4;
     private static final int MAX_PROGRAM_STEPS = 18;
     private static final int STEP_DELAY_MS = 250;
 
@@ -113,14 +113,8 @@ public class RoboticsGameActivity extends AppCompatActivity {
     }
 
     private void initObstacles() {
-        // Fixed obstacles so the level is predictable.
+        // Easy mode: no obstacles.
         obstacles.clear();
-        addObstacle(0, 3);
-        addObstacle(1, 1);
-        addObstacle(1, 4);
-        addObstacle(2, 2);
-        addObstacle(3, 4);
-        addObstacle(4, 1);
     }
 
     private void addObstacle(int row, int col) {

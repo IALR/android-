@@ -15,6 +15,7 @@ public class EducationHomeActivity extends AppCompatActivity {
     private CardView cardLearn;
     private CardView cardQuiz;
     private CardView cardRoboticsGame;
+    private CardView cardCircuitBuilder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,7 @@ public class EducationHomeActivity extends AppCompatActivity {
 
         cardLearn = findViewById(R.id.cardLearn);
         cardRoboticsGame = findViewById(R.id.cardRoboticsGame);
+        cardCircuitBuilder = findViewById(R.id.cardCircuitBuilder);
         cardQuiz = findViewById(R.id.cardQuiz);
 
         if (getSupportActionBar() != null) {
@@ -43,6 +45,11 @@ public class EducationHomeActivity extends AppCompatActivity {
 
         cardRoboticsGame.setOnClickListener(v -> {
             Intent intent = new Intent(EducationHomeActivity.this, RoboticsGameActivity.class);
+            startActivity(intent);
+        });
+
+        cardCircuitBuilder.setOnClickListener(v -> {
+            Intent intent = new Intent(EducationHomeActivity.this, CircuitBuilderActivity.class);
             startActivity(intent);
         });
     }

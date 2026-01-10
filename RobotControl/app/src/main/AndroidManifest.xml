@@ -115,6 +115,13 @@
             android:exported="false"
             android:label="@string/robotics_game_title"
             android:parentActivityName=".EducationHomeActivity" />
+
+        <!-- Circuit Builder Activity -->
+        <activity
+            android:name=".CircuitBuilderActivity"
+            android:exported="false"
+            android:label="@string/circuit_builder_title"
+            android:parentActivityName=".EducationHomeActivity" />
         
         <!-- Auto Reconnect Service -->
         <service
