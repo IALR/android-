@@ -10,91 +10,113 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="24dp">
+        android:padding="@dimen/padding_large">
 
-        <!-- Header -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="🤖 Robot WiFi Control"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            android:textColor="@color/text_primary"
-            android:layout_marginBottom="8dp"/>
-
-        <TextView
-            android:id="@+id/tvConnectionStatus"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Status: Disconnected"
-            android:textSize="14sp"
-            android:textColor="@color/text_secondary"
-            android:layout_marginBottom="8dp"/>
-
-        <TextView
-            android:id="@+id/tvCommandStatus"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Command: (none yet)"
-            android:textSize="13sp"
-            android:textColor="@color/text_secondary"
-            android:layout_marginBottom="24dp"/>
-
-        <!-- WiFi Connection Card -->
+        <!-- Header / Status -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="2dp"
+            android:layout_marginBottom="@dimen/margin_medium"
+            app:cardCornerRadius="@dimen/corner_radius_medium"
+            app:cardElevation="@dimen/elevation_low"
             app:cardBackgroundColor="@color/card_background">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="@dimen/padding_medium">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="WiFi Connection"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
+                    android:text="Robot Control"
+                    android:textAppearance="@style/TextAppearance.Headline" />
+
+                <TextView
+                    android:id="@+id/tvConnectionStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_tiny"
+                    android:text="Status: Disconnected"
+                    android:textAppearance="@style/TextAppearance.Caption" />
+
+                <TextView
+                    android:id="@+id/tvCommandStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_tiny"
+                    android:text="Command: (none yet)"
+                    android:textAppearance="@style/TextAppearance.Caption" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- WiFi Connection Card -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_medium"
+            app:cardCornerRadius="@dimen/corner_radius_medium"
+            app:cardElevation="@dimen/elevation_low"
+            app:cardBackgroundColor="@color/card_background">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/padding_medium">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Connection"
+                    android:textAppearance="@style/TextAppearance.Title"
                     android:textColor="@color/accent_primary"
-                    android:layout_marginBottom="12dp"/>
+                    android:layout_marginBottom="@dimen/margin_small" />
 
                 <Button
                     android:id="@+id/btnScanWiFi"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:text="🔍 Scan for Robots"
-                    android:textColor="@color/white"
+                    android:layout_height="@dimen/button_height"
+                    android:text="Scan for robots"
+                    android:textAppearance="@style/TextAppearance.Button"
+                    android:textAllCaps="false"
                     android:background="@color/accent_primary"
-                    android:layout_marginBottom="10dp"/>
+                    android:layout_marginBottom="@dimen/margin_small" />
 
                 <Spinner
                     android:id="@+id/spinnerNetworks"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginBottom="10dp"/>
+                    android:layout_height="@dimen/button_height"
+                    android:layout_marginBottom="@dimen/margin_small" />
 
-                <Button
-                    android:id="@+id/btnConnectToRobot"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:text="✓ Connect"
-                    android:textColor="@color/white"
-                    android:background="@color/status_connected"
-                    android:layout_marginBottom="10dp"/>
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/btnDisconnect"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:text="✕ Disconnect"
-                    android:textColor="@color/text_primary"
-                    android:background="@color/button_secondary"/>
+                    <Button
+                        android:id="@+id/btnConnectToRobot"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/button_height"
+                        android:layout_weight="1"
+                        android:text="Connect"
+                        android:textAppearance="@style/TextAppearance.Button"
+                        android:textAllCaps="false"
+                        android:background="@color/status_connected"
+                        android:layout_marginEnd="@dimen/margin_small" />
+
+                    <Button
+                        android:id="@+id/btnDisconnect"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/button_height"
+                        android:layout_weight="1"
+                        android:text="Disconnect"
+                        android:textAppearance="@style/TextAppearance.Body"
+                        android:textAllCaps="false"
+                        android:textColor="@color/text_primary"
+                        android:background="@color/button_secondary" />
+                </LinearLayout>
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -103,131 +125,120 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="2dp"
+            android:layout_marginBottom="@dimen/margin_medium"
+            app:cardCornerRadius="@dimen/corner_radius_medium"
+            app:cardElevation="@dimen/elevation_low"
             app:cardBackgroundColor="@color/card_background">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="20dp">
+                android:padding="@dimen/padding_medium">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="⚡ Motor Control"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
+                    android:text="Motor Control"
+                    android:textAppearance="@style/TextAppearance.Title"
                     android:textColor="@color/accent_primary"
-                    android:layout_marginBottom="16dp"/>
+                    android:layout_marginBottom="@dimen/margin_small" />
 
-                <!-- D-Pad Layout -->
                 <GridLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:alignmentMode="alignMargins"
+                    android:useDefaultMargins="true"
                     android:columnCount="3"
-                    android:rowCount="3"
-                    android:layout_gravity="center">
+                    android:rowCount="3">
 
-                    <!-- Empty Top-Left -->
-                    <View
+                    <Space
                         android:layout_row="0"
                         android:layout_column="0"
                         android:layout_width="0dp"
-                        android:layout_height="60dp"/>
+                        android:layout_height="@dimen/control_button_size"
+                        android:layout_columnWeight="1" />
 
-                    <!-- Forward Button -->
                     <Button
                         android:id="@+id/btnForward"
                         android:layout_row="0"
                         android:layout_column="1"
-                        android:layout_width="100dp"
-                        android:layout_height="60dp"
-                        android:text="↑ FWD"
-                        android:textColor="@color/white"
-                        android:background="@color/accent_primary"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:layout_margin="5dp"/>
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/control_button_size"
+                        android:layout_columnWeight="1"
+                        android:text="↑"
+                        android:textAppearance="@style/TextAppearance.Button"
+                        android:textAllCaps="false"
+                        android:background="@color/control_forward" />
 
-                    <!-- Empty Top-Right -->
-                    <View
+                    <Space
                         android:layout_row="0"
                         android:layout_column="2"
                         android:layout_width="0dp"
-                        android:layout_height="60dp"/>
+                        android:layout_height="@dimen/control_button_size"
+                        android:layout_columnWeight="1" />
 
-                    <!-- Left Button -->
                     <Button
                         android:id="@+id/btnLeft"
                         android:layout_row="1"
                         android:layout_column="0"
-                        android:layout_width="100dp"
-                        android:layout_height="60dp"
-                        android:text="← LFT"
-                        android:textColor="@color/white"
-                        android:background="@color/accent_primary"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:layout_margin="5dp"/>
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/control_button_size"
+                        android:layout_columnWeight="1"
+                        android:text="←"
+                        android:textAppearance="@style/TextAppearance.Button"
+                        android:textAllCaps="false"
+                        android:background="@color/control_left" />
 
-                    <!-- Stop Button -->
                     <Button
                         android:id="@+id/btnStop"
                         android:layout_row="1"
                         android:layout_column="1"
-                        android:layout_width="100dp"
-                        android:layout_height="60dp"
-                        android:text="⊙ STP"
-                        android:textColor="@color/white"
-                        android:background="@color/error"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:layout_margin="5dp"/>
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/control_button_size"
+                        android:layout_columnWeight="1"
+                        android:text="Stop"
+                        android:textAppearance="@style/TextAppearance.Button"
+                        android:textAllCaps="false"
+                        android:background="@color/control_stop" />
 
-                    <!-- Right Button -->
                     <Button
                         android:id="@+id/btnRight"
                         android:layout_row="1"
                         android:layout_column="2"
-                        android:layout_width="100dp"
-                        android:layout_height="60dp"
-                        android:text="RGT →"
-                        android:textColor="@color/white"
-                        android:background="@color/accent_primary"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:layout_margin="5dp"/>
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/control_button_size"
+                        android:layout_columnWeight="1"
+                        android:text="→"
+                        android:textAppearance="@style/TextAppearance.Button"
+                        android:textAllCaps="false"
+                        android:background="@color/control_right" />
 
-                    <!-- Empty Bottom-Left -->
-                    <View
+                    <Space
                         android:layout_row="2"
                         android:layout_column="0"
                         android:layout_width="0dp"
-                        android:layout_height="60dp"/>
+                        android:layout_height="@dimen/control_button_size"
+                        android:layout_columnWeight="1" />
 
-                    <!-- Backward Button -->
                     <Button
                         android:id="@+id/btnBackward"
                         android:layout_row="2"
                         android:layout_column="1"
-                        android:layout_width="100dp"
-                        android:layout_height="60dp"
-                        android:text="↓ BCK"
-                        android:textColor="@color/white"
-                        android:background="@color/accent_primary"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:layout_margin="5dp"/>
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/control_button_size"
+                        android:layout_columnWeight="1"
+                        android:text="↓"
+                        android:textAppearance="@style/TextAppearance.Button"
+                        android:textAllCaps="false"
+                        android:background="@color/control_backward" />
 
-                    <!-- Empty Bottom-Right -->
-                    <View
+                    <Space
                         android:layout_row="2"
                         android:layout_column="2"
                         android:layout_width="0dp"
-                        android:layout_height="60dp"/>
+                        android:layout_height="@dimen/control_button_size"
+                        android:layout_columnWeight="1" />
 
                 </GridLayout>
             </LinearLayout>
@@ -237,55 +248,54 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="2dp"
+            android:layout_marginBottom="@dimen/margin_medium"
+            app:cardCornerRadius="@dimen/corner_radius_medium"
+            app:cardElevation="@dimen/elevation_low"
             app:cardBackgroundColor="@color/card_background">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="20dp">
+                android:padding="@dimen/padding_medium">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="⚙️ Servo Control"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
+                    android:text="Servo Control"
+                    android:textAppearance="@style/TextAppearance.Title"
                     android:textColor="@color/accent_primary"
-                    android:layout_marginBottom="16dp"/>
+                    android:layout_marginBottom="@dimen/margin_small" />
 
                 <!-- Servo 1 -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginBottom="16dp">
+                    android:layout_marginBottom="@dimen/margin_medium">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_marginBottom="8dp">
+                        android:layout_marginBottom="@dimen/margin_small">
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Servo 1 - Base"
-                            android:textColor="@color/text_primary"
-                            android:textSize="14sp"/>
+                            android:text="Servo 1"
+                            android:textAppearance="@style/TextAppearance.Body" />
 
                         <TextView
                             android:id="@+id/tvServo1Value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="90°"
+                            android:textAppearance="@style/TextAppearance.Subtitle"
                             android:textColor="@color/accent_primary"
-                            android:textSize="14sp"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold"
+                            android:fontFamily="monospace" />
                     </LinearLayout>
 
                     <SeekBar
@@ -294,7 +304,7 @@
                         android:layout_height="wrap_content"
                         android:min="0"
                         android:max="180"
-                        android:progress="90"/>
+                        android:progress="90" />
                 </LinearLayout>
 
                 <!-- Servo 2 -->
@@ -302,30 +312,30 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginBottom="16dp">
+                    android:layout_marginBottom="@dimen/margin_medium">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_marginBottom="8dp">
+                        android:layout_marginBottom="@dimen/margin_small">
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Servo 2 - Shoulder"
-                            android:textColor="@color/text_primary"
-                            android:textSize="14sp"/>
+                            android:text="Servo 2"
+                            android:textAppearance="@style/TextAppearance.Body" />
 
                         <TextView
                             android:id="@+id/tvServo2Value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="90°"
+                            android:textAppearance="@style/TextAppearance.Subtitle"
                             android:textColor="@color/accent_primary"
-                            android:textSize="14sp"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold"
+                            android:fontFamily="monospace" />
                     </LinearLayout>
 
                     <SeekBar
@@ -334,7 +344,7 @@
                         android:layout_height="wrap_content"
                         android:min="0"
                         android:max="180"
-                        android:progress="90"/>
+                        android:progress="90" />
                 </LinearLayout>
 
                 <!-- Servo 3 -->
@@ -347,24 +357,24 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_marginBottom="8dp">
+                        android:layout_marginBottom="@dimen/margin_small">
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Servo 3 - Gripper"
-                            android:textColor="@color/text_primary"
-                            android:textSize="14sp"/>
+                            android:text="Servo 3"
+                            android:textAppearance="@style/TextAppearance.Body" />
 
                         <TextView
                             android:id="@+id/tvServo3Value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="90°"
+                            android:textAppearance="@style/TextAppearance.Subtitle"
                             android:textColor="@color/accent_primary"
-                            android:textSize="14sp"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold"
+                            android:fontFamily="monospace" />
                     </LinearLayout>
 
                     <SeekBar
@@ -373,7 +383,7 @@
                         android:layout_height="wrap_content"
                         android:min="0"
                         android:max="180"
-                        android:progress="90"/>
+                        android:progress="90" />
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>

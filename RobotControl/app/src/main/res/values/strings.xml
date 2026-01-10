@@ -68,7 +68,8 @@
     <string name="robot_info">Robot Information</string>
     <string name="name">Name</string>
     <string name="type">Type</string>
-    <string name="mac_address">MAC Address</string>
+    <string name="mac_address">Address</string>
+    <string name="ip_address">IP Address</string>
     <string name="permissions">Permissions</string>
     <string name="add_permission">Add Permission</string>
     <string name="revoke_permission">Revoke Permission</string>

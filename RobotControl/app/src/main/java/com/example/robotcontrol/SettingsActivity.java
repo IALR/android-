@@ -29,6 +29,7 @@ public class SettingsActivity extends AppCompatActivity implements PermissionAda
     private static final String KEY_USER_ID = "user_id";
 
     private TextView robotNameText, robotTypeText, robotMacText;
+    private TextView connectionTypeText, ipAddressText;
     private Button addPermissionButton, deleteRobotButton;
     private RecyclerView permissionsRecyclerView;
     private PermissionAdapter permissionAdapter;
@@ -41,6 +42,8 @@ public class SettingsActivity extends AppCompatActivity implements PermissionAda
     private DatabaseHelper dbHelper;
     private String currentUserId;
 
+    private boolean canManageRobot = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +52,12 @@ public class SettingsActivity extends AppCompatActivity implements PermissionAda
         // Get robot info from intent
         robotId = getIntent().getStringExtra("robot_id");
         robotName = getIntent().getStringExtra("robot_name");
+
+        if (robotId == null || robotId.trim().isEmpty()) {
+            Toast.makeText(this, "Missing robot id", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
 
         SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         currentUserId = prefs.getString(KEY_USER_ID, "local_user");
@@ -65,13 +74,15 @@ public class SettingsActivity extends AppCompatActivity implements PermissionAda
         robotNameText = findViewById(R.id.robotNameText);
         robotTypeText = findViewById(R.id.robotTypeText);
         robotMacText = findViewById(R.id.macAddressText);
+        connectionTypeText = findViewById(R.id.connectionTypeText);
+        ipAddressText = findViewById(R.id.ipAddressText);
         addPermissionButton = findViewById(R.id.addPermissionButton);
         deleteRobotButton = findViewById(R.id.deleteButton);
         permissionsRecyclerView = findViewById(R.id.permissionsRecyclerView);
 
         // Setup RecyclerView
         permissionList = new ArrayList<>();
-        permissionAdapter = new PermissionAdapter(this, permissionList, this);
+        permissionAdapter = new PermissionAdapter(this, permissionList, false, this);
         permissionsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         permissionsRecyclerView.setAdapter(permissionAdapter);
 
@@ -79,16 +90,84 @@ public class SettingsActivity extends AppCompatActivity implements PermissionAda
         loadRobotDetails();
         loadPermissions();
 
-        addPermissionButton.setOnClickListener(v -> showAddPermissionDialog());
-        deleteRobotButton.setOnClickListener(v -> confirmDeleteRobot());
+        addPermissionButton.setOnClickListener(v -> {
+            if (!canManageRobot) {
+                Toast.makeText(this, "Only the owner can grant access", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            showAddPermissionDialog();
+        });
+        deleteRobotButton.setOnClickListener(v -> {
+            if (!canManageRobot) {
+                Toast.makeText(this, "Only the owner can delete this robot", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            confirmDeleteRobot();
+        });
+
+        robotNameText.setOnClickListener(v -> {
+            if (!canManageRobot) {
+                Toast.makeText(this, "Only the owner can edit", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            showEditFieldDialog("Robot Name", robotNameText.getText().toString(), value -> {
+                if (robot != null) {
+                    robot.setName(value);
+                    dbHelper.updateRobot(robot);
+                    loadRobotDetails();
+                }
+            });
+        });
+
+        robotTypeText.setOnClickListener(v -> {
+            if (!canManageRobot) {
+                Toast.makeText(this, "Only the owner can edit", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            showEditFieldDialog("Robot Type", robotTypeText.getText().toString(), value -> {
+                if (robot != null) {
+                    robot.setType(value);
+                    dbHelper.updateRobot(robot);
+                    loadRobotDetails();
+                }
+            });
+        });
     }
 
     private void loadRobotDetails() {
         robot = dbHelper.getRobot(robotId);
-        if (robot != null) {
-            robotNameText.setText(robot.getName());
-            robotTypeText.setText(robot.getType());
-            robotMacText.setText(robot.getMacAddress());
+        if (robot == null) {
+            Toast.makeText(this, "Robot not found", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+
+        canManageRobot = robot.getOwnerId() != null
+                && (robot.getOwnerId().equals(currentUserId) || robot.getOwnerId().equals("local_user"));
+
+        robotNameText.setText(robot.getName());
+        robotTypeText.setText(robot.getType());
+        robotMacText.setText(robot.getMacAddress());
+
+        if (connectionTypeText != null) {
+            String ct = robot.getConnectionType();
+            connectionTypeText.setText(ct == null || ct.trim().isEmpty() ? "unknown" : ct);
+        }
+        if (ipAddressText != null) {
+            String ip = robot.getIpAddress();
+            ipAddressText.setText(ip == null || ip.trim().isEmpty() ? "-" : ip);
+        }
+
+        // Update adapter button visibility based on ownership
+        permissionAdapter.setCanRevoke(canManageRobot);
+        permissionAdapter.notifyDataSetChanged();
+
+        // Hide dangerous actions for non-owners
+        if (!canManageRobot) {
+            addPermissionButton.setEnabled(false);
+            deleteRobotButton.setEnabled(false);
+            deleteRobotButton.setAlpha(0.5f);
+            addPermissionButton.setAlpha(0.5f);
         }
     }
 
@@ -97,6 +176,32 @@ public class SettingsActivity extends AppCompatActivity implements PermissionAda
         List<RobotPermission> permissions = dbHelper.getPermissionsForRobot(robotId);
         permissionList.addAll(permissions);
         permissionAdapter.notifyDataSetChanged();
+    }
+
+    private interface OnValueSaved {
+        void onSaved(String value);
+    }
+
+    private void showEditFieldDialog(String title, String initialValue, OnValueSaved onSaved) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_add_permission, null);
+
+        EditText input = dialogView.findViewById(R.id.emailInput);
+        input.setHint(title);
+        input.setText(initialValue);
+
+        builder.setView(dialogView)
+                .setTitle(title)
+                .setPositiveButton(R.string.add, (dialog, which) -> {
+                    String value = input.getText().toString().trim();
+                    if (TextUtils.isEmpty(value)) {
+                        Toast.makeText(this, "Value is required", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    onSaved.onSaved(value);
+                })
+                .setNegativeButton(R.string.cancel, null)
+                .show();
     }
 
     private void showAddPermissionDialog() {
@@ -136,6 +241,10 @@ public class SettingsActivity extends AppCompatActivity implements PermissionAda
 
     @Override
     public void onRevokePermission(RobotPermission permission) {
+        if (!canManageRobot) {
+            Toast.makeText(this, "Only the owner can revoke access", Toast.LENGTH_SHORT).show();
+            return;
+        }
         new AlertDialog.Builder(this)
                 .setTitle(R.string.revoke_permission)
                 .setMessage("Revoke access for " + permission.getUserEmail() + "?")

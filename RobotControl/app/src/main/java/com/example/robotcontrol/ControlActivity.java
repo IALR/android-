@@ -36,6 +36,9 @@ public class ControlActivity extends AppCompatActivity {
     private Button testButton;
     private SeekBar speedSeekBar, servo1SeekBar, servo2SeekBar;
     private TextView speedValue, servo1Value, servo2Value;
+
+    private final SeekBar[] servoSeekBars = new SeekBar[8];
+    private final TextView[] servoValueTexts = new TextView[8];
     private Toolbar toolbar;
 
     private String robotId;
@@ -95,14 +98,6 @@ public class ControlActivity extends AppCompatActivity {
 
         robotNameText.setText(robotName);
 
-        // This activity uses Bluetooth Serial (SPP). Map UI -> same commands as your Python script.
-        // a=forward, b=backward, s=stop, l=low, w=walk, t=test
-        forwardButton.setText("A");
-        backwardButton.setText("B");
-        stopButton.setText("S");
-        leftButton.setText("LOW");
-        rightButton.setText("WALK");
-
         // Load robot details
         robot = dbHelper.getRobot(robotId);
 
@@ -142,7 +137,6 @@ public class ControlActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 servo1Value.setText(progress + "°");
-                // Not used by the single-letter servo robot protocol.
             }
 
             @Override
@@ -156,7 +150,6 @@ public class ControlActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 servo2Value.setText(progress + "°");
-                // Not used by the single-letter servo robot protocol.
             }
 
             @Override
@@ -165,6 +158,79 @@ public class ControlActivity extends AppCompatActivity {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {}
         });
+
+        // 8-servo manual controls (Bluetooth command format: p<index>:<angle>; e.g. p3:120;)
+        servoSeekBars[0] = servo1SeekBar;
+        servoSeekBars[1] = servo2SeekBar;
+        servoValueTexts[0] = servo1Value;
+        servoValueTexts[1] = servo2Value;
+
+        servoSeekBars[2] = findViewById(R.id.servoCSlider);
+        servoSeekBars[3] = findViewById(R.id.servoDSlider);
+        servoSeekBars[4] = findViewById(R.id.servoESlider);
+        servoSeekBars[5] = findViewById(R.id.servoFSlider);
+        servoSeekBars[6] = findViewById(R.id.servoGSlider);
+        servoSeekBars[7] = findViewById(R.id.servoHSlider);
+
+        servoValueTexts[2] = findViewById(R.id.servoCValueText);
+        servoValueTexts[3] = findViewById(R.id.servoDValueText);
+        servoValueTexts[4] = findViewById(R.id.servoEValueText);
+        servoValueTexts[5] = findViewById(R.id.servoFValueText);
+        servoValueTexts[6] = findViewById(R.id.servoGValueText);
+        servoValueTexts[7] = findViewById(R.id.servoHValueText);
+
+        for (int i = 0; i < 8; i++) {
+            final int servoIndex = i + 1;
+            SeekBar bar = servoSeekBars[i];
+            TextView valueText = servoValueTexts[i];
+            if (bar == null || valueText == null) continue;
+
+            bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                    valueText.setText(progress + "°");
+                }
+
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {
+                }
+
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+                    sendServoCommand(servoIndex, seekBar.getProgress());
+                }
+            });
+        }
+    }
+
+    private void sendServoCommand(int servoIndex, int angle) {
+        if (!isConnected || outputStream == null) {
+            setCommandStatus("Servo " + servoIndex + ": not sent (not connected)");
+            return;
+        }
+        if (servoIndex < 1 || servoIndex > 8) return;
+        if (angle < 0) angle = 0;
+        if (angle > 180) angle = 180;
+
+        final String cmd = "p" + servoIndex + ":" + angle + ";";
+        setCommandStatus("Servo " + servoIndex + ": sending " + angle + "°");
+
+        int finalAngle = angle;
+        new Thread(() -> {
+            try {
+                outputStream.write(cmd.getBytes());
+                outputStream.flush();
+                runOnUiThread(() -> setCommandStatus("Servo " + servoIndex + ": sent " + finalAngle + "°"));
+            } catch (IOException e) {
+                runOnUiThread(() -> {
+                    Toast.makeText(this, "Failed to send servo command", Toast.LENGTH_SHORT).show();
+                    isConnected = false;
+                    updateConnectionStatus(false);
+                    enableControls(false);
+                    setCommandStatus("Servo " + servoIndex + ": failed");
+                });
+            }
+        }).start();
     }
 
     private void connect() {
@@ -365,8 +431,9 @@ public class ControlActivity extends AppCompatActivity {
         rightButton.setEnabled(enable);
         stopButton.setEnabled(enable);
         speedSeekBar.setEnabled(enable);
-        servo1SeekBar.setEnabled(enable);
-        servo2SeekBar.setEnabled(enable);
+        for (int i = 0; i < servoSeekBars.length; i++) {
+            if (servoSeekBars[i] != null) servoSeekBars[i].setEnabled(enable);
+        }
     }
 
     @Override

@@ -24,16 +24,23 @@ public class PermissionAdapter extends RecyclerView.Adapter<PermissionAdapter.Pe
     private Context context;
     private List<RobotPermission> permissionList;
     private OnPermissionActionListener listener;
+    private boolean canRevoke;
 
     public interface OnPermissionActionListener {
         void onRevokePermission(RobotPermission permission);
     }
 
-    public PermissionAdapter(Context context, List<RobotPermission> permissionList, 
-                            OnPermissionActionListener listener) {
+    public PermissionAdapter(Context context, List<RobotPermission> permissionList,
+                             boolean canRevoke,
+                             OnPermissionActionListener listener) {
         this.context = context;
         this.permissionList = permissionList;
+        this.canRevoke = canRevoke;
         this.listener = listener;
+    }
+
+    public void setCanRevoke(boolean canRevoke) {
+        this.canRevoke = canRevoke;
     }
 
     @NonNull
@@ -49,6 +56,7 @@ public class PermissionAdapter extends RecyclerView.Adapter<PermissionAdapter.Pe
 
         holder.userEmail.setText(permission.getUserEmail());
 
+        holder.revokeButton.setVisibility(canRevoke ? View.VISIBLE : View.GONE);
         holder.revokeButton.setOnClickListener(v -> listener.onRevokePermission(permission));
     }
 

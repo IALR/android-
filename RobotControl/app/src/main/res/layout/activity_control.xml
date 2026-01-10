@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/bg_gradient_primary">
+    android:background="@color/background_primary">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -24,208 +24,227 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="@dimen/padding_medium">
+            android:padding="@dimen/padding_large">
 
-            <!-- Robot Info Card -->
+            <!-- Header / Status (match WiFi screen style) -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="@dimen/corner_radius_large"
-                app:cardElevation="@dimen/elevation_high"
-                android:layout_marginBottom="@dimen/margin_medium">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/padding_medium"
-                    android:gravity="center_vertical">
-
-                    <ImageView
-                        android:layout_width="@dimen/icon_large"
-                        android:layout_height="@dimen/icon_large"
-                        android:src="@drawable/ic_robot_full"
-                        android:contentDescription="@string/robot_icon"
-                        android:layout_marginEnd="@dimen/margin_medium" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/robotNameText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/robot_name"
-                            android:textAppearance="@style/TextAppearance.Title"
-                            android:textColor="@color/text_primary"
-                            android:layout_marginBottom="@dimen/margin_tiny" />
-
-                        <TextView
-                            android:id="@+id/connectionStatusText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/status_disconnected"
-                            android:textAppearance="@style/TextAppearance.Caption"
-                            android:textColor="@color/status_disconnected" />
-
-                        <TextView
-                            android:id="@+id/commandStatusText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Command: (none yet)"
-                            android:textAppearance="@style/TextAppearance.Caption"
-                            android:textColor="@color/text_secondary"
-                            android:layout_marginTop="@dimen/margin_tiny" />
-                    </LinearLayout>
-
-                    <ImageView
-                        android:id="@+id/connectionStatusIcon"
-                        android:layout_width="@dimen/icon_medium"
-                        android:layout_height="@dimen/icon_medium"
-                        android:src="@drawable/ic_disconnected"
-                        android:contentDescription="@string/connection_status" />
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/receiveLogText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textAppearance="@style/TextAppearance.Caption"
-                    android:textColor="@color/text_secondary"
-                    android:paddingTop="@dimen/padding_small"
-                    android:maxLines="6" />
-            </androidx.cardview.widget.CardView>
-
-            <!-- Movement Controls Card -->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="@dimen/corner_radius_large"
-                app:cardElevation="@dimen/elevation_high"
-                android:layout_marginBottom="@dimen/margin_medium">
+                android:layout_marginBottom="@dimen/margin_medium"
+                app:cardCornerRadius="@dimen/corner_radius_medium"
+                app:cardElevation="@dimen/elevation_low"
+                app:cardBackgroundColor="@color/card_background">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="@dimen/padding_large">
+                    android:padding="@dimen/padding_medium">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/movement_controls"
-                        android:textAppearance="@style/TextAppearance.Headline"
-                        android:textColor="@color/text_primary"
-                        android:layout_marginBottom="@dimen/margin_medium" />
-
-                    <!-- Direction Controls -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:gravity="center">
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
 
-                        <!-- Forward Button -->
-                        <Button
-                            android:id="@+id/forwardButton"
-                            android:layout_width="@dimen/control_button_size"
-                            android:layout_height="@dimen/control_button_size"
-                            android:layout_marginBottom="@dimen/margin_small"
-                            android:background="@drawable/bg_control_forward"
-                            android:drawableTop="@drawable/ic_arrow_up"
-                            android:text="@string/forward"
-                            android:textAppearance="@style/TextAppearance.Button"
-                            android:textColor="@android:color/white"
-                            android:elevation="@dimen/elevation_medium" />
-
-                        <!-- Left, Stop, Right Row -->
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_marginBottom="@dimen/margin_small">
+                            android:layout_weight="1"
+                            android:orientation="vertical">
 
-                            <Button
-                                android:id="@+id/leftButton"
-                                android:layout_width="@dimen/control_button_size"
-                                android:layout_height="@dimen/control_button_size"
-                                android:layout_marginEnd="@dimen/margin_small"
-                                android:background="@drawable/bg_control_turn"
-                                android:drawableTop="@drawable/ic_arrow_left"
-                                android:text="@string/left"
-                                android:textAppearance="@style/TextAppearance.Button"
-                                android:textColor="@android:color/white"
-                                android:elevation="@dimen/elevation_medium" />
+                            <TextView
+                                android:id="@+id/robotNameText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/robot_name"
+                                android:textAppearance="@style/TextAppearance.Headline" />
 
-                            <Button
-                                android:id="@+id/stopButton"
-                                android:layout_width="@dimen/control_button_size"
-                                android:layout_height="@dimen/control_button_size"
-                                android:layout_marginStart="@dimen/margin_small"
-                                android:layout_marginEnd="@dimen/margin_small"
-                                android:background="@drawable/bg_control_stop"
-                                android:text="@string/stop"
-                                android:textAppearance="@style/TextAppearance.Headline"
-                                android:textColor="@android:color/white"
-                                android:textStyle="bold"
-                                android:elevation="@dimen/elevation_high" />
+                            <TextView
+                                android:id="@+id/connectionStatusText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin_tiny"
+                                android:text="@string/status_disconnected"
+                                android:textAppearance="@style/TextAppearance.Caption"
+                                android:textColor="@color/status_disconnected" />
 
-                            <Button
-                                android:id="@+id/rightButton"
-                                android:layout_width="@dimen/control_button_size"
-                                android:layout_height="@dimen/control_button_size"
-                                android:layout_marginStart="@dimen/margin_small"
-                                android:background="@drawable/bg_control_turn"
-                                android:drawableTop="@drawable/ic_arrow_right"
-                                android:text="@string/right"
-                                android:textAppearance="@style/TextAppearance.Button"
-                                android:textColor="@android:color/white"
-                                android:elevation="@dimen/elevation_medium" />
+                            <TextView
+                                android:id="@+id/commandStatusText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin_tiny"
+                                android:text="Command: (none yet)"
+                                android:textAppearance="@style/TextAppearance.Caption"
+                                android:textColor="@color/text_secondary" />
                         </LinearLayout>
 
-                        <!-- Backward Button -->
-                        <Button
-                            android:id="@+id/backwardButton"
-                            android:layout_width="@dimen/control_button_size"
-                            android:layout_height="@dimen/control_button_size"
-                            android:background="@drawable/bg_control_backward"
-                            android:drawableTop="@drawable/ic_arrow_down"
-                            android:text="@string/backward"
-                            android:textAppearance="@style/TextAppearance.Button"
-                            android:textColor="@android:color/white"
-                            android:elevation="@dimen/elevation_medium" />
-
-                        <Button
-                            android:id="@+id/testButton"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/margin_medium"
-                            android:text="@string/test_servos"
-                            android:textAppearance="@style/TextAppearance.Button"
-                            android:textColor="@android:color/white"
-                            android:background="@color/accent_primary"
-                            android:elevation="@dimen/elevation_medium" />
+                        <ImageView
+                            android:id="@+id/connectionStatusIcon"
+                            android:layout_width="@dimen/icon_medium"
+                            android:layout_height="@dimen/icon_medium"
+                            android:src="@drawable/ic_disconnected"
+                            android:contentDescription="@string/connection_status" />
                     </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/receiveLogText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_small"
+                        android:text=""
+                        android:textAppearance="@style/TextAppearance.Caption"
+                        android:textColor="@color/text_secondary"
+                        android:maxLines="6" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Speed Control Card -->
+            <!-- Motor Control (match WiFi D-pad card layout) -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="@dimen/corner_radius_large"
-                app:cardElevation="@dimen/elevation_high"
-                android:layout_marginBottom="@dimen/margin_medium">
+                android:layout_marginBottom="@dimen/margin_medium"
+                app:cardCornerRadius="@dimen/corner_radius_medium"
+                app:cardElevation="@dimen/elevation_low"
+                app:cardBackgroundColor="@color/card_background">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="@dimen/padding_large">
+                    android:padding="@dimen/padding_medium">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Motor Control"
+                        android:textAppearance="@style/TextAppearance.Title"
+                        android:textColor="@color/accent_primary"
+                        android:layout_marginBottom="@dimen/margin_small" />
+
+                    <GridLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:alignmentMode="alignMargins"
+                        android:useDefaultMargins="true"
+                        android:columnCount="3"
+                        android:rowCount="3">
+
+                        <Space
+                            android:layout_row="0"
+                            android:layout_column="0"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/control_button_size"
+                            android:layout_columnWeight="1" />
+
+                        <Button
+                            android:id="@+id/forwardButton"
+                            android:layout_row="0"
+                            android:layout_column="1"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/control_button_size"
+                            android:layout_columnWeight="1"
+                            android:text="↑"
+                            android:textAppearance="@style/TextAppearance.Button"
+                            android:textAllCaps="false"
+                            android:background="@color/control_forward" />
+
+                        <Space
+                            android:layout_row="0"
+                            android:layout_column="2"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/control_button_size"
+                            android:layout_columnWeight="1" />
+
+                        <Button
+                            android:id="@+id/leftButton"
+                            android:layout_row="1"
+                            android:layout_column="0"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/control_button_size"
+                            android:layout_columnWeight="1"
+                            android:text="LOW"
+                            android:textAppearance="@style/TextAppearance.Button"
+                            android:textAllCaps="false"
+                            android:background="@color/control_left" />
+
+                        <Button
+                            android:id="@+id/stopButton"
+                            android:layout_row="1"
+                            android:layout_column="1"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/control_button_size"
+                            android:layout_columnWeight="1"
+                            android:text="Stop"
+                            android:textAppearance="@style/TextAppearance.Button"
+                            android:textAllCaps="false"
+                            android:background="@color/control_stop" />
+
+                        <Button
+                            android:id="@+id/rightButton"
+                            android:layout_row="1"
+                            android:layout_column="2"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/control_button_size"
+                            android:layout_columnWeight="1"
+                            android:text="WALK"
+                            android:textAppearance="@style/TextAppearance.Button"
+                            android:textAllCaps="false"
+                            android:background="@color/control_right" />
+
+                        <Space
+                            android:layout_row="2"
+                            android:layout_column="0"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/control_button_size"
+                            android:layout_columnWeight="1" />
+
+                        <Button
+                            android:id="@+id/backwardButton"
+                            android:layout_row="2"
+                            android:layout_column="1"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/control_button_size"
+                            android:layout_columnWeight="1"
+                            android:text="↓"
+                            android:textAppearance="@style/TextAppearance.Button"
+                            android:textAllCaps="false"
+                            android:background="@color/control_backward" />
+
+                        <Space
+                            android:layout_row="2"
+                            android:layout_column="2"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/control_button_size"
+                            android:layout_columnWeight="1" />
+                    </GridLayout>
+
+                    <Button
+                        android:id="@+id/testButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/button_height"
+                        android:layout_marginTop="@dimen/margin_medium"
+                        android:text="@string/test_servos"
+                        android:textAppearance="@style/TextAppearance.Button"
+                        android:textAllCaps="false"
+                        android:background="@color/accent_primary" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Speed (kept for compatibility, styled like WiFi cards) -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_medium"
+                app:cardCornerRadius="@dimen/corner_radius_medium"
+                app:cardElevation="@dimen/elevation_low"
+                app:cardBackgroundColor="@color/card_background">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/padding_medium">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -237,18 +256,19 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="@string/speed_control"
-                            android:textAppearance="@style/TextAppearance.Headline"
-                            android:textColor="@color/text_primary" />
+                            android:text="Speed"
+                            android:textAppearance="@style/TextAppearance.Title"
+                            android:textColor="@color/accent_primary" />
 
                         <TextView
                             android:id="@+id/speedValueText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="50"
-                            android:textAppearance="@style/TextAppearance.Title"
-                            android:textColor="@color/robot_blue_primary"
-                            android:textStyle="bold" />
+                            android:textAppearance="@style/TextAppearance.Subtitle"
+                            android:textColor="@color/text_secondary"
+                            android:textStyle="bold"
+                            android:fontFamily="monospace" />
                     </LinearLayout>
 
                     <SeekBar
@@ -257,100 +277,360 @@
                         android:layout_height="wrap_content"
                         android:max="100"
                         android:progress="50"
-                        android:progressTint="@color/robot_blue_primary"
-                        android:thumbTint="@color/robot_blue_primary" />
+                        android:progressTint="@color/accent_primary"
+                        android:thumbTint="@color/accent_primary" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Servo Controls Card -->
+            <!-- Manual Servo Control (8) -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="@dimen/corner_radius_large"
-                app:cardElevation="@dimen/elevation_high">
+                android:layout_marginBottom="@dimen/margin_medium"
+                app:cardCornerRadius="@dimen/corner_radius_medium"
+                app:cardElevation="@dimen/elevation_low"
+                app:cardBackgroundColor="@color/card_background">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="@dimen/padding_large">
+                    android:padding="@dimen/padding_medium">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/servo_controls"
-                        android:textAppearance="@style/TextAppearance.Headline"
-                        android:textColor="@color/text_primary"
-                        android:layout_marginBottom="@dimen/margin_medium" />
+                        android:text="Servo Control"
+                        android:textAppearance="@style/TextAppearance.Title"
+                        android:textColor="@color/accent_primary"
+                        android:layout_marginBottom="@dimen/margin_small" />
 
-                    <!-- Servo A -->
+                    <!-- Servo 1 -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginBottom="@dimen/margin_small">
+                        android:orientation="vertical"
+                        android:layout_marginBottom="@dimen/margin_medium">
 
-                        <TextView
-                            android:layout_width="0dp"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="@string/servo_a"
-                            android:textAppearance="@style/TextAppearance.Subtitle"
-                            android:textColor="@color/text_primary" />
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="@dimen/margin_small">
 
-                        <TextView
-                            android:id="@+id/servoAValueText"
-                            android:layout_width="wrap_content"
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Servo 1"
+                                android:textAppearance="@style/TextAppearance.Body" />
+
+                            <TextView
+                                android:id="@+id/servoAValueText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="90°"
+                                android:textAppearance="@style/TextAppearance.Subtitle"
+                                android:textColor="@color/accent_primary"
+                                android:textStyle="bold"
+                                android:fontFamily="monospace" />
+                        </LinearLayout>
+
+                        <SeekBar
+                            android:id="@+id/servoASlider"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="90°"
-                            android:textAppearance="@style/TextAppearance.Subtitle"
-                            android:textColor="@color/tech_orange"
-                            android:textStyle="bold" />
+                            android:max="180"
+                            android:progress="90"
+                            android:progressTint="@color/accent_primary"
+                            android:thumbTint="@color/accent_primary" />
                     </LinearLayout>
 
-                    <SeekBar
-                        android:id="@+id/servoASlider"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:max="180"
-                        android:progress="90"
-                        android:layout_marginBottom="@dimen/margin_large"
-                        android:progressTint="@color/tech_orange"
-                        android:thumbTint="@color/tech_orange" />
-
-                    <!-- Servo B -->
+                    <!-- Servo 2 -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginBottom="@dimen/margin_small">
+                        android:orientation="vertical"
+                        android:layout_marginBottom="@dimen/margin_medium">
 
-                        <TextView
-                            android:layout_width="0dp"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="@string/servo_b"
-                            android:textAppearance="@style/TextAppearance.Subtitle"
-                            android:textColor="@color/text_primary" />
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="@dimen/margin_small">
 
-                        <TextView
-                            android:id="@+id/servoBValueText"
-                            android:layout_width="wrap_content"
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Servo 2"
+                                android:textAppearance="@style/TextAppearance.Body" />
+
+                            <TextView
+                                android:id="@+id/servoBValueText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="90°"
+                                android:textAppearance="@style/TextAppearance.Subtitle"
+                                android:textColor="@color/accent_primary"
+                                android:textStyle="bold"
+                                android:fontFamily="monospace" />
+                        </LinearLayout>
+
+                        <SeekBar
+                            android:id="@+id/servoBSlider"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="90°"
-                            android:textAppearance="@style/TextAppearance.Subtitle"
-                            android:textColor="@color/tech_orange"
-                            android:textStyle="bold" />
+                            android:max="180"
+                            android:progress="90"
+                            android:progressTint="@color/accent_primary"
+                            android:thumbTint="@color/accent_primary" />
                     </LinearLayout>
 
-                    <SeekBar
-                        android:id="@+id/servoBSlider"
+                    <!-- Servo 3 -->
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:max="180"
-                        android:progress="90"
-                        android:progressTint="@color/tech_orange"
-                        android:thumbTint="@color/tech_orange" />
+                        android:orientation="vertical"
+                        android:layout_marginBottom="@dimen/margin_medium">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="@dimen/margin_small">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Servo 3"
+                                android:textAppearance="@style/TextAppearance.Body" />
+
+                            <TextView
+                                android:id="@+id/servoCValueText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="90°"
+                                android:textAppearance="@style/TextAppearance.Subtitle"
+                                android:textColor="@color/accent_primary"
+                                android:textStyle="bold"
+                                android:fontFamily="monospace" />
+                        </LinearLayout>
+
+                        <SeekBar
+                            android:id="@+id/servoCSlider"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:max="180"
+                            android:progress="90"
+                            android:progressTint="@color/accent_primary"
+                            android:thumbTint="@color/accent_primary" />
+                    </LinearLayout>
+
+                    <!-- Servo 4 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="@dimen/margin_medium">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="@dimen/margin_small">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Servo 4"
+                                android:textAppearance="@style/TextAppearance.Body" />
+
+                            <TextView
+                                android:id="@+id/servoDValueText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="90°"
+                                android:textAppearance="@style/TextAppearance.Subtitle"
+                                android:textColor="@color/accent_primary"
+                                android:textStyle="bold"
+                                android:fontFamily="monospace" />
+                        </LinearLayout>
+
+                        <SeekBar
+                            android:id="@+id/servoDSlider"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:max="180"
+                            android:progress="90"
+                            android:progressTint="@color/accent_primary"
+                            android:thumbTint="@color/accent_primary" />
+                    </LinearLayout>
+
+                    <!-- Servo 5 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="@dimen/margin_medium">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="@dimen/margin_small">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Servo 5"
+                                android:textAppearance="@style/TextAppearance.Body" />
+
+                            <TextView
+                                android:id="@+id/servoEValueText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="90°"
+                                android:textAppearance="@style/TextAppearance.Subtitle"
+                                android:textColor="@color/accent_primary"
+                                android:textStyle="bold"
+                                android:fontFamily="monospace" />
+                        </LinearLayout>
+
+                        <SeekBar
+                            android:id="@+id/servoESlider"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:max="180"
+                            android:progress="90"
+                            android:progressTint="@color/accent_primary"
+                            android:thumbTint="@color/accent_primary" />
+                    </LinearLayout>
+
+                    <!-- Servo 6 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="@dimen/margin_medium">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="@dimen/margin_small">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Servo 6"
+                                android:textAppearance="@style/TextAppearance.Body" />
+
+                            <TextView
+                                android:id="@+id/servoFValueText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="90°"
+                                android:textAppearance="@style/TextAppearance.Subtitle"
+                                android:textColor="@color/accent_primary"
+                                android:textStyle="bold"
+                                android:fontFamily="monospace" />
+                        </LinearLayout>
+
+                        <SeekBar
+                            android:id="@+id/servoFSlider"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:max="180"
+                            android:progress="90"
+                            android:progressTint="@color/accent_primary"
+                            android:thumbTint="@color/accent_primary" />
+                    </LinearLayout>
+
+                    <!-- Servo 7 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="@dimen/margin_medium">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="@dimen/margin_small">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Servo 7"
+                                android:textAppearance="@style/TextAppearance.Body" />
+
+                            <TextView
+                                android:id="@+id/servoGValueText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="90°"
+                                android:textAppearance="@style/TextAppearance.Subtitle"
+                                android:textColor="@color/accent_primary"
+                                android:textStyle="bold"
+                                android:fontFamily="monospace" />
+                        </LinearLayout>
+
+                        <SeekBar
+                            android:id="@+id/servoGSlider"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:max="180"
+                            android:progress="90"
+                            android:progressTint="@color/accent_primary"
+                            android:thumbTint="@color/accent_primary" />
+                    </LinearLayout>
+
+                    <!-- Servo 8 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="@dimen/margin_small">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Servo 8"
+                                android:textAppearance="@style/TextAppearance.Body" />
+
+                            <TextView
+                                android:id="@+id/servoHValueText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="90°"
+                                android:textAppearance="@style/TextAppearance.Subtitle"
+                                android:textColor="@color/accent_primary"
+                                android:textStyle="bold"
+                                android:fontFamily="monospace" />
+                        </LinearLayout>
+
+                        <SeekBar
+                            android:id="@+id/servoHSlider"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:max="180"
+                            android:progress="90"
+                            android:progressTint="@color/accent_primary"
+                            android:thumbTint="@color/accent_primary" />
+                    </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 

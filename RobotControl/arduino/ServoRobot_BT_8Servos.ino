@@ -214,6 +214,76 @@ void handleCommand(char c) {
   }
 }
 
+static bool readServoSetCommand(int* outServoIndex, int* outAngle) {
+  // Expected: p<servoIndex>:<angle>;
+  // Example: p3:120;
+  // We are called AFTER receiving 'p' and will read the rest until ';'.
+  unsigned long start = millis();
+  int servoIndex = -1;
+  int angle = -1;
+  bool seenColon = false;
+  String digits;
+
+  while (millis() - start < 400) {
+    while (BT_PORT.available() > 0) {
+      char ch = (char)BT_PORT.read();
+      if (ch == '\r' || ch == '\n' || ch == ' ') continue;
+      if (ch == ';') {
+        // finalize
+        if (!seenColon) return false;
+        angle = digits.toInt();
+        if (servoIndex < 1 || servoIndex > 8) return false;
+        if (angle < 0 || angle > 180) return false;
+        *outServoIndex = servoIndex;
+        *outAngle = angle;
+        return true;
+      }
+      if (!seenColon) {
+        if (ch == ':') {
+          servoIndex = digits.toInt();
+          digits = "";
+          seenColon = true;
+        } else if (ch >= '0' && ch <= '9') {
+          digits += ch;
+        } else {
+          return false;
+        }
+      } else {
+        if (ch >= '0' && ch <= '9') {
+          digits += ch;
+        } else {
+          return false;
+        }
+      }
+    }
+    delay(1);
+  }
+  return false;
+}
+
+static void setServoManual(int servoIndex, int angle) {
+  if (servoIndex < 1 || servoIndex > 8) return;
+  angle = constrain(angle, 0, 180);
+  servos[servoIndex - 1].write(angle);
+
+  Serial.print("[CMD] p -> servo ");
+  Serial.print(servoIndex);
+  Serial.print(" = ");
+  Serial.println(angle);
+
+#if BT_SEPARATE_FROM_USB_SERIAL
+  BT_PORT.print("OK p");
+  BT_PORT.print(servoIndex);
+  BT_PORT.print(" ");
+  BT_PORT.println(angle);
+#else
+  BT_PORT.print("OK p");
+  BT_PORT.print(servoIndex);
+  BT_PORT.print(" ");
+  BT_PORT.println(angle);
+#endif
+}
+
 void loop() {
   // Read Bluetooth serial one character at a time (same as your Python script)
   while (BT_PORT.available() > 0) {
@@ -222,6 +292,20 @@ void loop() {
     // normalize
     if (c >= 'A' && c <= 'Z') c = (char)(c - 'A' + 'a');
     logRxChar(c);
+
+    // Manual servo set: p<index>:<angle>;
+    if (c == 'p') {
+      int servoIndex = -1;
+      int angle = -1;
+      if (readServoSetCommand(&servoIndex, &angle)) {
+        setServoManual(servoIndex, angle);
+      } else {
+        logLine("[CMD] p -> invalid");
+        BT_PORT.println("ERR p (invalid)");
+      }
+      continue;
+    }
+
     handleCommand(c);
   }
 }

@@ -118,6 +118,54 @@
                             android:textColor="@color/text_hint"
                             android:fontFamily="monospace" />
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/margin_small">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/connection_type"
+                            android:textAppearance="@style/TextAppearance.Body"
+                            android:textColor="@color/text_secondary" />
+
+                        <TextView
+                            android:id="@+id/connectionTypeText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="wifi"
+                            android:textAppearance="@style/TextAppearance.Subtitle"
+                            android:textColor="@color/text_primary"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/margin_small">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/ip_address"
+                            android:textAppearance="@style/TextAppearance.Body"
+                            android:textColor="@color/text_secondary" />
+
+                        <TextView
+                            android:id="@+id/ipAddressText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="192.168.4.1"
+                            android:textAppearance="@style/TextAppearance.Caption"
+                            android:textColor="@color/text_hint"
+                            android:fontFamily="monospace" />
+                    </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
