@@ -74,6 +74,12 @@
         <activity
             android:name=".MainActivity"
             android:exported="false" />
+
+        <!-- Robot List Activity -->
+        <activity
+            android:name=".RobotListActivity"
+            android:exported="false"
+            android:label="@string/my_robots" />
         
         <!-- Robot Control Activity -->
         <activity

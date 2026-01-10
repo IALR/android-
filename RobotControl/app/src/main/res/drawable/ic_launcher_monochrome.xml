@@ -1,10 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="108dp"
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
 
-    <!-- Robot icon scaled from ic_robot_splash (200x200 -> 108x108) -->
+    <!-- Monochrome robot for themed icons (Android 13+) -->
     <group android:scaleX="0.54" android:scaleY="0.54">
         <!-- Robot Head -->
         <path
@@ -13,17 +14,17 @@
 
         <!-- Left Eye -->
         <path
-            android:fillColor="#1E88E5"
+            android:fillColor="#FFFFFF"
             android:pathData="M 67,57 A 8,8 0 1,1 83,57 A 8,8 0 1,1 67,57" />
 
         <!-- Right Eye -->
         <path
-            android:fillColor="#1E88E5"
+            android:fillColor="#FFFFFF"
             android:pathData="M 117,57 A 8,8 0 1,1 133,57 A 8,8 0 1,1 117,57" />
 
         <!-- Mouth -->
         <path
-            android:strokeColor="#1E88E5"
+            android:strokeColor="#FFFFFF"
             android:strokeWidth="3"
             android:fillColor="@android:color/transparent"
             android:pathData="M 80,85 Q 100,95 120,85" />
@@ -55,8 +56,8 @@
 
         <!-- Chest Panel Detail -->
         <path
-            android:fillColor="#1E88E5"
-            android:fillAlpha="0.3"
+            android:fillColor="#FFFFFF"
+            android:fillAlpha="0.35"
             android:pathData="M 80,130 L 120,130 L 120,165 L 80,165 Z" />
     </group>
 
