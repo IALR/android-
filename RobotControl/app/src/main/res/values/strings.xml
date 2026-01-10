@@ -123,6 +123,25 @@
     <string name="education_tab_power_safety">Power &amp; Safety</string>
     <string name="education_tab_robot_building">Robot Building</string>
 
+    <!-- Robotics mini-game -->
+    <string name="robotics_game_title">Robot Path Planner</string>
+    <string name="robotics_game_card_desc">Program moves to reach the goal</string>
+    <string name="robotics_game_subtitle">Build a short command program to move the robot from S to G without hitting obstacles.</string>
+    <string name="robotics_game_legend">Legend: S = Start, G = Goal, R = Robot, # = Obstacle</string>
+    <string name="robotics_game_commands">Commands</string>
+    <string name="robotics_game_left">Left</string>
+    <string name="robotics_game_forward">Forward</string>
+    <string name="robotics_game_right">Right</string>
+    <string name="robotics_game_run">Run</string>
+    <string name="robotics_game_reset">Reset</string>
+    <string name="robotics_game_program_prefix">Program:</string>
+    <string name="robotics_game_program_empty">Program: (tap Left/Forward/Right to add moves)</string>
+    <string name="robotics_game_add_moves">Add at least one move first</string>
+    <string name="robotics_game_crash">Crash! Try a different program.</string>
+    <string name="robotics_game_finished_not_goal">Program finished. Not at the goal yet.</string>
+    <string name="robotics_game_success">Success! You reached the goal.</string>
+    <string name="robotics_game_too_long">Program too long (max %1$d moves)</string>
+
     <string name="education_electricity_content">Electricity fundamentals\n\n• Voltage (V): “electrical pressure” that pushes charge.\n• Current (I): flow of charge (Amps).\n• Resistance (R): how much a material/component resists current (Ohms).\n\nKey laws &amp; formulas\n• Ohm\'s Law: V = I × R\n• Power: P = V × I\n• Energy (battery life): Wh ≈ V × Ah\n\nSeries vs parallel\n• Series: same current, voltages add up across components.\n• Parallel: same voltage, currents add up in branches.\n\nSafety basics\n• Always use a resistor with LEDs.\n• Disconnect power before rewiring.\n• Check polarity on batteries, LEDs, and electrolytic capacitors.</string>
     <string name="education_circuits_content">Circuits &amp; electronics basics\n\nCore components\n• Resistor: limits current / sets voltage dividers.\n• Capacitor: smooths noise, stores charge briefly.\n• Diode/LED: allows current one way (LED also emits light).\n• Transistor/MOSFET: electronic switch to control motors/LEDs.\n\nBreadboard basics\n• Middle area: connected rows for building circuits.\n• Side rails: usually power (VCC) and ground (GND).\n\nReading diagrams\n• Symbols represent parts; wires show connections.\n• Ground symbols mean “same reference point.”\n\nArduino essentials\n• Digital vs analog: digital is HIGH/LOW; analog reads a range.\n• PWM is used to control brightness/motor speed.\n• Always share GND between Arduino and external power sources.</string>
     <string name="education_mechatronics_content">Mechatronics &amp; robotics\n\nActuators (motors)\n• Servo motors: easy position control (angle) using pulse width.\n• DC motors: continuous rotation; need a motor driver for direction + speed.\n\nSensors\n• Ultrasonic: distance measurement (echo timing).\n• IR: line following / obstacle detection (depends on sensor).\n• Temperature / light: environment awareness for behavior.\n\nControl concepts\n• PWM (Pulse Width Modulation): controls average power smoothly.\n• Closed-loop vs open-loop: feedback (sensors) improves accuracy.\n\nRobot building tips\n• Keep wiring tidy and secure.\n• Use a stable power supply for motors (separate from logic when possible).\n• Test one subsystem at a time: power → motors → sensors → communication.</string>

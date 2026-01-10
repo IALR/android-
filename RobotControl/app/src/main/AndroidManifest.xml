@@ -108,6 +108,13 @@
             android:exported="false"
             android:label="@string/education_tab_quiz"
             android:parentActivityName=".EducationHomeActivity" />
+
+        <!-- Robotics Game Activity -->
+        <activity
+            android:name=".RoboticsGameActivity"
+            android:exported="false"
+            android:label="@string/robotics_game_title"
+            android:parentActivityName=".EducationHomeActivity" />
         
         <!-- Auto Reconnect Service -->
         <service
