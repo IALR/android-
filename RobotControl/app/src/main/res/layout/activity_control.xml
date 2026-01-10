@@ -70,6 +70,15 @@
                             android:text="@string/status_disconnected"
                             android:textAppearance="@style/TextAppearance.Caption"
                             android:textColor="@color/status_disconnected" />
+
+                        <TextView
+                            android:id="@+id/commandStatusText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Command: (none yet)"
+                            android:textAppearance="@style/TextAppearance.Caption"
+                            android:textColor="@color/text_secondary"
+                            android:layout_marginTop="@dimen/margin_tiny" />
                     </LinearLayout>
 
                     <ImageView
@@ -79,6 +88,16 @@
                         android:src="@drawable/ic_disconnected"
                         android:contentDescription="@string/connection_status" />
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/receiveLogText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textAppearance="@style/TextAppearance.Caption"
+                    android:textColor="@color/text_secondary"
+                    android:paddingTop="@dimen/padding_small"
+                    android:maxLines="6" />
             </androidx.cardview.widget.CardView>
 
             <!-- Movement Controls Card -->
@@ -178,6 +197,17 @@
                             android:text="@string/backward"
                             android:textAppearance="@style/TextAppearance.Button"
                             android:textColor="@android:color/white"
+                            android:elevation="@dimen/elevation_medium" />
+
+                        <Button
+                            android:id="@+id/testButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_medium"
+                            android:text="@string/test_servos"
+                            android:textAppearance="@style/TextAppearance.Button"
+                            android:textColor="@android:color/white"
+                            android:background="@color/accent_primary"
                             android:elevation="@dimen/elevation_medium" />
                     </LinearLayout>
                 </LinearLayout>

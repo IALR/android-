@@ -20,6 +20,7 @@ import com.example.robotcontrol.database.DatabaseHelper;
 import com.example.robotcontrol.models.Robot;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.UUID;
 
@@ -28,8 +29,11 @@ public class ControlActivity extends AppCompatActivity {
     private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
     private TextView robotNameText, connectionStatusText;
+    private TextView commandStatusText;
+    private TextView receiveLogText;
     private ImageView connectionStatusIcon;
     private Button forwardButton, backwardButton, leftButton, rightButton, stopButton;
+    private Button testButton;
     private SeekBar speedSeekBar, servo1SeekBar, servo2SeekBar;
     private TextView speedValue, servo1Value, servo2Value;
     private Toolbar toolbar;
@@ -42,7 +46,11 @@ public class ControlActivity extends AppCompatActivity {
     private BluetoothAdapter bluetoothAdapter;
     private BluetoothSocket bluetoothSocket;
     private OutputStream outputStream;
+    private InputStream inputStream;
     private boolean isConnected = false;
+
+    private volatile boolean readLoopRunning = false;
+    private Thread readThread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +74,8 @@ public class ControlActivity extends AppCompatActivity {
 
         robotNameText = findViewById(R.id.robotNameText);
         connectionStatusText = findViewById(R.id.connectionStatusText);
+        commandStatusText = findViewById(R.id.commandStatusText);
+        receiveLogText = findViewById(R.id.receiveLogText);
         connectionStatusIcon = findViewById(R.id.connectionStatusIcon);
 
         forwardButton = findViewById(R.id.forwardButton);
@@ -73,6 +83,7 @@ public class ControlActivity extends AppCompatActivity {
         leftButton = findViewById(R.id.leftButton);
         rightButton = findViewById(R.id.rightButton);
         stopButton = findViewById(R.id.stopButton);
+        testButton = findViewById(R.id.testButton);
 
         speedSeekBar = findViewById(R.id.speedSlider);
         servo1SeekBar = findViewById(R.id.servoASlider);
@@ -83,6 +94,14 @@ public class ControlActivity extends AppCompatActivity {
         servo2Value = findViewById(R.id.servoBValueText);
 
         robotNameText.setText(robotName);
+
+        // This activity uses Bluetooth Serial (SPP). Map UI -> same commands as your Python script.
+        // a=forward, b=backward, s=stop, l=low, w=walk, t=test
+        forwardButton.setText("A");
+        backwardButton.setText("B");
+        stopButton.setText("S");
+        leftButton.setText("LOW");
+        rightButton.setText("WALK");
 
         // Load robot details
         robot = dbHelper.getRobot(robotId);
@@ -96,19 +115,20 @@ public class ControlActivity extends AppCompatActivity {
     }
 
     private void setupControls() {
-        forwardButton.setOnClickListener(v -> sendCommand("F"));
-        backwardButton.setOnClickListener(v -> sendCommand("B"));
-        leftButton.setOnClickListener(v -> sendCommand("L"));
-        rightButton.setOnClickListener(v -> sendCommand("R"));
-        stopButton.setOnClickListener(v -> sendCommand("S"));
+        forwardButton.setOnClickListener(v -> sendCommand("a"));
+        backwardButton.setOnClickListener(v -> sendCommand("b"));
+        leftButton.setOnClickListener(v -> sendCommand("l"));
+        rightButton.setOnClickListener(v -> sendCommand("w"));
+        stopButton.setOnClickListener(v -> sendCommand("s"));
+        if (testButton != null) {
+            testButton.setOnClickListener(v -> sendCommand("t"));
+        }
 
         speedSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 speedValue.setText(String.valueOf(progress));
-                if (fromUser && isConnected) {
-                    sendCommand("V" + progress);
-                }
+                // Not used by the single-letter servo robot protocol.
             }
 
             @Override
@@ -122,9 +142,7 @@ public class ControlActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 servo1Value.setText(progress + "°");
-                if (fromUser && isConnected) {
-                    sendCommand("A" + progress);
-                }
+                // Not used by the single-letter servo robot protocol.
             }
 
             @Override
@@ -138,9 +156,7 @@ public class ControlActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 servo2Value.setText(progress + "°");
-                if (fromUser && isConnected) {
-                    sendCommand("B" + progress);
-                }
+                // Not used by the single-letter servo robot protocol.
             }
 
             @Override
@@ -174,12 +190,16 @@ public class ControlActivity extends AppCompatActivity {
                 bluetoothSocket = device.createRfcommSocketToServiceRecord(MY_UUID);
                 bluetoothSocket.connect();
                 outputStream = bluetoothSocket.getOutputStream();
+                inputStream = bluetoothSocket.getInputStream();
 
                 runOnUiThread(() -> {
                     isConnected = true;
                     updateConnectionStatus(true);
                     enableControls(true);
                     Toast.makeText(this, "Connected to " + robotName, Toast.LENGTH_SHORT).show();
+
+                    setCommandStatus("Command: connected (ready)");
+                    startReadLoop();
                     
                     // Update last connected time in local database
                     robot.setLastConnected(System.currentTimeMillis());
@@ -192,15 +212,88 @@ public class ControlActivity extends AppCompatActivity {
                     Toast.makeText(this, "Connection failed: " + e.getMessage(), 
                             Toast.LENGTH_SHORT).show();
                     updateConnectionStatus(false);
+                    setCommandStatus("Command: connect failed");
                 });
             }
         }).start();
     }
 
+    private void setCommandStatus(String text) {
+        runOnUiThread(() -> {
+            if (commandStatusText != null) {
+                commandStatusText.setText(text);
+            }
+        });
+    }
+
+    private void appendReceiveLog(String line) {
+        runOnUiThread(() -> {
+            if (receiveLogText == null) return;
+            String current = receiveLogText.getText() != null ? receiveLogText.getText().toString() : "";
+            String updated = current.isEmpty() ? line : (current + "\n" + line);
+            // Keep it short
+            String[] parts = updated.split("\n");
+            if (parts.length > 6) {
+                StringBuilder sb = new StringBuilder();
+                for (int i = parts.length - 6; i < parts.length; i++) {
+                    sb.append(parts[i]);
+                    if (i != parts.length - 1) sb.append("\n");
+                }
+                updated = sb.toString();
+            }
+            receiveLogText.setText(updated);
+        });
+    }
+
+    private void startReadLoop() {
+        if (inputStream == null) return;
+        if (readLoopRunning) return;
+
+        readLoopRunning = true;
+        readThread = new Thread(() -> {
+            StringBuilder lineBuffer = new StringBuilder();
+            byte[] buf = new byte[256];
+            while (readLoopRunning) {
+                try {
+                    int n = inputStream.read(buf);
+                    if (n <= 0) continue;
+                    for (int i = 0; i < n; i++) {
+                        char c = (char) (buf[i] & 0xFF);
+                        if (c == '\r') continue;
+                        if (c == '\n') {
+                            String line = lineBuffer.toString().trim();
+                            lineBuffer.setLength(0);
+                            if (!line.isEmpty()) {
+                                appendReceiveLog("[Robot] " + line);
+                            }
+                        } else {
+                            lineBuffer.append(c);
+                        }
+                    }
+                } catch (IOException e) {
+                    readLoopRunning = false;
+                }
+            }
+        });
+        readThread.start();
+    }
+
     private void disconnect() {
         try {
+            readLoopRunning = false;
+            if (readThread != null) {
+                try {
+                    readThread.interrupt();
+                } catch (Exception ignored) {
+                }
+                readThread = null;
+            }
+
             if (outputStream != null) {
                 outputStream.close();
+            }
+            if (inputStream != null) {
+                inputStream.close();
             }
             if (bluetoothSocket != null) {
                 bluetoothSocket.close();
@@ -208,6 +301,8 @@ public class ControlActivity extends AppCompatActivity {
             isConnected = false;
             updateConnectionStatus(false);
             enableControls(false);
+
+            setCommandStatus("Command: disconnected");
             
             if (robot != null) {
                 robot.setConnected(false);
@@ -224,19 +319,27 @@ public class ControlActivity extends AppCompatActivity {
     private void sendCommand(String command) {
         if (!isConnected || outputStream == null) {
             Toast.makeText(this, "Not connected to robot", Toast.LENGTH_SHORT).show();
+            setCommandStatus("Command: (not sent — not connected)");
             return;
         }
 
+        if (command == null || command.trim().isEmpty()) return;
+        final String cmd = command.trim().toLowerCase();
+        setCommandStatus("Command: sending '" + cmd + "'");
+
         new Thread(() -> {
             try {
-                outputStream.write((command + "\n").getBytes());
+                // Match your Python serial behavior: send a single byte/character (no newline).
+                outputStream.write(cmd.getBytes());
                 outputStream.flush();
+                runOnUiThread(() -> setCommandStatus("Command: sent '" + cmd + "'"));
             } catch (IOException e) {
                 runOnUiThread(() -> {
                     Toast.makeText(this, "Failed to send command", Toast.LENGTH_SHORT).show();
                     isConnected = false;
                     updateConnectionStatus(false);
                     enableControls(false);
+                    setCommandStatus("Command: failed to send");
                 });
             }
         }).start();

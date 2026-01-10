@@ -59,6 +59,9 @@
     <string name="robot_icon">Robot Icon</string>
     <string name="last_connected">Last Connected</string>
     <string name="login_subtitle">Connect and Control Your Robot Fleet</string>
+
+    <!-- Bluetooth Serial Commands (Servo Robot) -->
+    <string name="test_servos">Test Servos</string>
     
     <!-- Settings -->
     <string name="robot_settings">Robot Settings</string>
