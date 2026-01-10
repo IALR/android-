@@ -53,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // Check if user is already logged in
         if (prefs.getBoolean(KEY_IS_LOGGED_IN, false)) {
-            navigateToRobotList();
+            navigateToMain();
         }
     }
 
@@ -87,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
             editor.apply();
             
             Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
-            navigateToRobotList();
+            navigateToMain();
         } else {
             Toast.makeText(this, "Invalid email or password", Toast.LENGTH_SHORT).show();
         }
@@ -140,7 +140,7 @@ public class LoginActivity extends AppCompatActivity {
             editor.apply();
             
             Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show();
-            navigateToRobotList();
+            navigateToMain();
         } else {
             Toast.makeText(this, "Registration failed", Toast.LENGTH_SHORT).show();
         }
@@ -157,8 +157,8 @@ public class LoginActivity extends AppCompatActivity {
         Toast.makeText(this, "Password reset is not available in offline mode", Toast.LENGTH_SHORT).show();
     }
 
-    private void navigateToRobotList() {
-        Intent intent = new Intent(this, RobotListActivity.class);
+    private void navigateToMain() {
+        Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("user_id", prefs.getString(KEY_USER_ID, "local_user"));
         startActivity(intent);
         finish();
