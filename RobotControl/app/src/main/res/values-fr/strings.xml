@@ -3,6 +3,7 @@
     <string name="app_name">RoboConnect</string>
     <string name="app_title">RoboConnect</string>
     <string name="app_subtitle">Gestion centralisée de flotte robotique</string>
+    <string name="view_all">Voir tout</string>
 
     <!-- Login -->
     <string name="email">E-mail</string>

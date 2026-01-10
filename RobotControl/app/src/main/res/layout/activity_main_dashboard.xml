@@ -103,7 +103,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- My Robots Card -->
+            <!-- My Robots Card (preview top 3) -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardRobotList"
                 android:layout_width="match_parent"
@@ -116,46 +116,72 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="16dp"
-                    android:gravity="center_vertical">
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@drawable/ic_robot_full"
-                        android:tint="@color/accent_primary"
-                        android:contentDescription="Robot Icon"/>
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
                     <LinearLayout
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:layout_marginStart="16dp">
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/ic_robot_full"
+                            android:tint="@color/accent_primary"
+                            android:contentDescription="Robot Icon" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:id="@+id/tvRobotPreviewTitle"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="16dp"
                             android:text="@string/my_robots"
                             android:textSize="16sp"
                             android:textStyle="bold"
-                            android:textColor="@color/text_primary"/>
+                            android:textColor="@color/text_primary" />
 
                         <TextView
+                            android:id="@+id/btnViewAllRobots"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/dashboard_manage_robots"
+                            android:text="@string/view_all"
                             android:textSize="14sp"
-                            android:textColor="@color/text_secondary"/>
+                            android:textStyle="bold"
+                            android:textColor="@color/accent_primary"
+                            android:paddingStart="8dp"
+                            android:paddingEnd="8dp"
+                            android:paddingTop="6dp"
+                            android:paddingBottom="6dp" />
                     </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/ic_arrow_right"
-                        android:tint="@color/text_secondary"
-                        android:contentDescription="Arrow Right"/>
+                    <TextView
+                        android:id="@+id/tvRobotPreviewSubtitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/dashboard_manage_robots"
+                        android:textSize="14sp"
+                        android:textColor="@color/text_secondary" />
+
+                    <TextView
+                        android:id="@+id/tvRobotPreviewEmpty"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/no_robots"
+                        android:textSize="14sp"
+                        android:textColor="@color/text_secondary"
+                        android:visibility="gone" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvRobotPreview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:nestedScrollingEnabled="false" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
